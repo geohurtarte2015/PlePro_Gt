@@ -77,7 +77,15 @@ public class GetWebservice {
                     }
                     
                     int code = conn.getResponseCode();
+                    String response = conn.getResponseMessage();
+                    String message = conn.getHeaderField(7);
+                    
+                    if(code!=200){
                     System.out.println(code);
+                    return "0";
+                    
+                    }
+          
                     
                     try(BufferedReader br = new BufferedReader(new InputStreamReader(conn.getInputStream(), "utf-8"))){
                         responseHttp = new StringBuilder();

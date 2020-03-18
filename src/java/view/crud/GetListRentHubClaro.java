@@ -19,11 +19,8 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import model.ExecuteSql;
 
-/**
- *
- * @author LENOVO
- */
-public class GetListSubscriberUserHubClaro extends HttpServlet {
+
+public class GetListRentHubClaro extends HttpServlet {
 
 
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
@@ -43,7 +40,7 @@ public class GetListSubscriberUserHubClaro extends HttpServlet {
     protected void doPost(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
         
-            processRequest(request, response);
+        processRequest(request, response);
         
         String msisdn="";
         String email="";
@@ -72,11 +69,11 @@ public class GetListSubscriberUserHubClaro extends HttpServlet {
         response.setContentType("application/json");
         PrintWriter out = response.getWriter();
         
-        RequestJson requestJson = new RequestJson();
+          RequestJson requestJson = new RequestJson();
         ResultQueryUserResponse responseQueryUserResponse = new ResultQueryUserResponse();
 
         
-        responseQueryUserResponse = requestJson.queryOttSubscriptions("http://172.16.204.189:30100/hubOTT/internal/rest/QueryUserOtt", "GT", email, msisdn,"consultardatoscliente",dateInit,dateFinish);
+        responseQueryUserResponse = requestJson.queryOttDevice("http://172.16.204.189:30100/hubOTT/internal/rest/QueryOtt", "GT", email, msisdn,"consultarrentascliente",dateInit,dateFinish);
         
         String description = responseQueryUserResponse.getResponse().getDescription();
         int code = responseQueryUserResponse.getResponse().getCode();

@@ -258,19 +258,54 @@
                   <div class="panel-heading">Detalle cuenta de Usuarios</div>
           
                   <div class="panel-body">
-                      
-                           <div class="panel-body">
+                                  
+                        <div class="panel-body">
                             <form action="form_serviceGetSubscription" method="post" id="form_serviceGetSubscription">  
+                     
+                             <div class="row"> 
+                                <div class='col-lg-4'>
+                                          <div class="form-group">
+                                              <label>Fecha Inicio</label>
+                                              <div class='input-group date' id='fechainicioDato'>                                            
+                                                  <input type='text' id="fechainicioDatotxt" class="form-control" />
+                                                  <span class="input-group-addon">
+                                                      <span class="glyphicon glyphicon-calendar"></span>
+                                                  </span>
+                                              </div>
+                                          </div>
+                                      </div>
+                                      <div class='col-lg-4'>
+                                          <div class="form-group">
+                                              <label>Fecha Final</label>
+                                              <div class='input-group date'  id='fechafinalDato'>                                            
+                                                  <input id="fechafinalDatotxt" type='text' class="form-control" />
+                                                  <span class="input-group-addon">
+                                                      <span class="glyphicon glyphicon-calendar"></span>
+                                                  </span>
+                                              </div>
+                                          </div>
+                                      </div>        
+                                      <br>
+                             </div>
+                                
+                      
+                                <br>
+                               
                                 <div class="row"> 
-                                    <label>Selecciona el tipo de busqueda: </label>
-                                    <label class="radio-inline">
-                                        <input type="radio"  name="optradio" value="0">Telefono
-                                    </label>
-                                    <label class="radio-inline">
-                                        <input type="radio"  name="optradio" value="1">Email
-                                    </label>                            
+                                    <div class="col-sm-6">
+                                            <div class="form-group">
+                                        <label>Selecciona el tipo de busqueda: </label>
+                                        <label class="radio-inline">
+                                            <input type="radio"  name="optradio" value="0">Telefono
+                                        </label>
+                                        <label class="radio-inline">
+                                            <input type="radio"  name="optradio" value="1">Email
+                                        </label>   
+                                            </div>
+                                    </div>
                                 </div>
-                                          <br>
+                                
+                                 <br>
                                   <div class="row"> 
                                     <div class="col-sm-4">
                                         <div class="form-group">
@@ -279,6 +314,7 @@
                                         </div>
                                     </div>   
                                   </div>
+                                 
                              <div class="row"> 
                                 <div class="col-sm-4">
                                     <div class="form-group">
@@ -302,46 +338,7 @@
                           </div>
                           <div id="collapse1" class="panel-collapse collapse in">
                               <div class="panel-body">
-                                  <div class="row">                      
-                                      <div class='col-lg-4'>
-                                          <div class="form-group">
-                                              <label>Fecha Inicio</label>
-                                              <div class='input-group date' id='fechainicioDato'>                                            
-                                                  <input type='text' id="fechainicioDatotxt" class="form-control" />
-                                                  <span class="input-group-addon">
-                                                      <span class="glyphicon glyphicon-calendar"></span>
-                                                  </span>
-                                              </div>
-                                          </div>
-                                      </div>
-                                      <div class='col-lg-4'>
-                                          <div class="form-group">
-                                              <label>Fecha Final</label>
-                                              <div class='input-group date'  id='fechafinalDato'>                                            
-                                                  <input id="fechafinalDatotxt" type='text' class="form-control" />
-                                                  <span class="input-group-addon">
-                                                      <span class="glyphicon glyphicon-calendar"></span>
-                                                  </span>
-                                              </div>
-                                          </div>
-                                      </div>        
-                                      <br>
-                                      <br>
-                                      <div class="form-group">
-                                          <div class="x_content">
-                                              <button type="button" id = "btnSubmitDato"  class="btn btn-success">Buscar</button>
-                                              <button type="button" id = "btnClearDato"  class="btn btn-success">Limpiar</button>
-                                          </div>
-                                      </div>
-                                  </div>
-                               
-                         
-                   
-                                  
-                               
-                                  
-                           
-                                  
+
                                 
                                   <div class="col-lg-12">
                                       <div class="panel-body">
@@ -349,28 +346,22 @@
                                               <table id="TABLEUSERCV" class="table table-striped table-bordered table-hover" cellspacing="0" width="100%">  
                                                   <thead>
                                                       <tr>
-                                                          <th>Email</th>
-                                                          <th>Factura Plan</th>
-                                                          <th>Usuario Producto</th>
+                                                          <th>Email</th>                                                      
                                                           <th>Nombre</th>
                                                           <th>Apellido</th>
-                                                          <th>No.Documento</th>    
+                                                          <th>Id. Usuario</th>    
                                                           <th>Medio de Pago</th>          
-                                                          <th>No.Cuenta</th>   
-                                                          <th>Id Interno</th>   
+                                                          <th>No.Cuenta</th>  
                                                       </tr>
                                                   </thead>
                                                   <tfoot>
                                                       <tr>
-                                                          <th>Email</th>
-                                                          <th>Factura Plan</th>
-                                                          <th>Usuario Producto</th>
+                                                          <th>Email</th>                                                      
                                                           <th>Nombre</th>
                                                           <th>Apellido</th>
-                                                          <th>No. Documento</th>    
+                                                          <th>Id. Usuario</th>    
                                                           <th>Medio de Pago</th>          
-                                                          <th>No.Cuenta</th>   
-                                                          <th>Id Interno</th>  
+                                                          <th>No.Cuenta</th>  
                                                       </tr>
                                                   </tfoot>
                                               </table>
@@ -397,46 +388,9 @@
                               <div class="panel-body">
                                   
                               <div class="panel panel-default">    
-                                <div class="panel-heading">Busqueda por fecha</div>
-                                
-                             <div class="panel-body">
-                              <div class="row">                      
-                                <div class='col-lg-4'>
-                                    <div class="form-group">
-                                        <label>Fecha Inicio</label>
-                                        <div class='input-group date' id='fechainicioSubscripcion'>                                            
-                                            <input type='text' id="fechainicioSubscripciontxt" class="form-control" />
-                                            <span class="input-group-addon">
-                                                <span class="glyphicon glyphicon-calendar"></span>
-                                            </span>
-                                        </div>
-                                    </div>
-                                </div>
-                                <div class='col-lg-4'>
-                                    <div class="form-group">
-                                        <label>Fecha Final</label>
-                                        <div class='input-group date'  id='fechafinalSubscripcion'>                                            
-                                            <input id="fechafinalSusbcripciontxt" type='text' class="form-control" />
-                                            <span class="input-group-addon">
-                                                <span class="glyphicon glyphicon-calendar"></span>
-                                            </span>
-                                        </div>
-                                    </div>
-                                </div>        
-                            <br>
-                            <br>
-                                  <div class="form-group">
-                                    <div class="x_content">
-                                       <button type="button" id = "btnSubmitSubscripcion"  class="btn btn-success">Buscar</button>
-                                       <button type="button" id = "btnClearSubscripcion"  class="btn btn-success">Limpiar</button>
-                                    </div>
-                                  </div>
-                            </div>
-                             </div>  
+                              
                               </div>       
-                                  
-                                  
-                                  
+                                                                    
                                   <div class="col-lg-12">
                                       <div class="panel-body">
                                           <div class="table-responsive">
@@ -490,38 +444,7 @@
                               
                               <div class="panel-body">
                                            <div class="panel-body">
-                              <div class="row">                      
-                                <div class='col-lg-4'>
-                                    <div class="form-group">
-                                        <label>Fecha Inicio</label>
-                                        <div class='input-group date' id='fechainicioAlquiler'>                                            
-                                            <input type='text' id="fechainicioAlquilertxt" class="form-control" />
-                                            <span class="input-group-addon">
-                                                <span class="glyphicon glyphicon-calendar"></span>
-                                            </span>
-                                        </div>
-                                    </div>
-                                </div>
-                                <div class='col-lg-4'>
-                                    <div class="form-group">
-                                        <label>Fecha Final</label>
-                                        <div class='input-group date'  id='fechafinalAlquiler'>                                            
-                                            <input id="fechafinalAlquilertxt" type='text' class="form-control" />
-                                            <span class="input-group-addon">
-                                                <span class="glyphicon glyphicon-calendar"></span>
-                                            </span>
-                                        </div>
-                                    </div>
-                                </div>        
-                            <br>
-                            <br>
-                                  <div class="form-group">
-                                    <div class="x_content">
-                                       <button type="button" id = "btnSubmitAlquiler"  class="btn btn-success">Buscar</button>
-                                       <button type="button" id = "btnClearAlquiler"  class="btn btn-success">Limpiar</button>
-                                    </div>
-                                  </div>
-                            </div>
+                      
                              </div>  
                                   
                                     <div class="col-lg-12">
@@ -577,40 +500,6 @@
                           <div id="collapse4" class="panel-collapse collapse">
                               <div class="panel-body">
                                   
-                              <div class="panel-body">
-                              <div class="row">                      
-                                <div class='col-lg-4'>
-                                    <div class="form-group">
-                                        <label>Fecha Inicio</label>
-                                        <div class='input-group date' id='fechainicioDispositivo'>                                            
-                                            <input type='text' id="fechainicioDispositivotxt" class="form-control" />
-                                            <span class="input-group-addon">
-                                                <span class="glyphicon glyphicon-calendar"></span>
-                                            </span>
-                                        </div>
-                                    </div>
-                                </div>
-                                <div class='col-lg-4'>
-                                    <div class="form-group">
-                                        <label>Fecha Final</label>
-                                        <div class='input-group date'  id='fechafinalDispositivo'>                                            
-                                            <input id="fechafinalDispositivotxt" type='text' class="form-control" />
-                                            <span class="input-group-addon">
-                                                <span class="glyphicon glyphicon-calendar"></span>
-                                            </span>
-                                        </div>
-                                    </div>
-                                </div>        
-                            <br>
-                            <br>
-                                  <div class="form-group">
-                                    <div class="x_content">
-                                       <button type="button" id = "btnSubmitDispositivio"  class="btn btn-success">Buscar</button>
-                                       <button type="button" id = "btnClearDispositivo"  class="btn btn-success">Limpiar</button>
-                                    </div>
-                                  </div>
-                            </div>
-                             </div>  
                                   
                                     <div class="col-lg-12">
                                       <div class="panel-body">
@@ -746,15 +635,24 @@
       var dateinit="";  
       var datefinish="";
       var msisdn="";
-         var opcion ="";
-            var valor="";  
+      var opcion= "";
+      var valor="";
       
       $('#message').hide();
+     $(function () {
+                    $('#fechainicioDato').datetimepicker({
+                        format: "DD-MM-YYYY hh:mm:ss a"                      
+                        });
+                    });
+                    
+     $(function () {
+                    $('#fechafinalDato').datetimepicker({
+                        format: "DD-MM-YYYY hh:mm:ss a"                      
+                        });
+                    });
 
         
-        $(document).ready(function(){
-            
-            
+        $(document).ready(function(){          
             
         var tableConsumo= $('#TABLECONSUMOCV').DataTable( {
                             "ajax" : {
@@ -783,9 +681,17 @@
                                     {"title": "MONEDA"}   
 
                             ]
-                    });
-                    
-        var tableDispositivos= $('#TABLEDISPOSITIVOSCV').DataTable( {                                 
+         });    
+        
+        var tableDispositivos= $('#TABLEDISPOSITIVOSCV').DataTable( {
+                            "ajax" : {
+                            "url": "GetListDeviceHubClaro",
+                            "type": "POST",
+                            "data" : function(d){                            
+                                             d.option=opcion;
+                                             d.valor=valor; 
+                                            }              
+                             }, 
                             "global" : false,
                             "lengthMenu": [[ 4, -1], [ 4,20,"All"]],
                             "dataType" : "json",
@@ -794,15 +700,23 @@
                                   'csv', 'excel'
                                        ],
                             "columns" : [       
-                                    {"title": "Dispositivo"},
-                                    {"title": "Nombre"},
-                                    {"title": "Product ID/Serial"},
+                                    {"title": "Id Dispositivo"},
+                                    {"title": "Tipo de Dispositivo"},
+                                    {"title": "Nombre de Dispositivo"},
                                     {"title": "Fecha Activación"},
                                     {"title": "Acciones"}     
                             ]
                     });
                     
-        var tableUser= $('#TABLEUSERCV').DataTable( {                                 
+        var tableUser= $('#TABLEUSERCV').DataTable( {    
+                            "ajax" : {
+                            "url": "GetListDataUserHubClaro",
+                            "type": "POST",
+                            "data" : function(d){                            
+                                             d.option=opcion;
+                                             d.valor=valor; 
+                                            }              
+                             }, 
                             "global" : false,
                             "lengthMenu": [[ 4, -1], [ 4,20,"All"]],
                             "dataType" : "json",
@@ -810,16 +724,13 @@
                             "buttons" : [
                                   'csv', 'excel'
                                        ],
-                            "columns" : [       
-                                    {"title": "Email"},
-                                    {"title": "Factura Plan"},
-                                    {"title": "Usuario Producto"},
+                            "columns" : [   
+                                    {"title": "Email"},                      
                                     {"title": "Nombre"},
-                                    {"title": "Apellido"},     
-                                    {"title": "No.Documento"}, 
+                                    {"title": "Apellido"}, 
+                                    {"title": "Id. Usuario"}, 
                                     {"title": "Medio de Pago"}, 
-                                    {"title": "No.Cuenta"}, 
-                                    {"title": "Id Interno"}
+                                    {"title": "No.Cuenta"}
                             ]
                     });
                     
@@ -843,23 +754,20 @@
                                     {"title": "Acciones"}
                             ]
                     });
-                    
-
-                    
-        
-  
-            
-        
-                    
-           
-            
+              
             
            $("#form_serviceGetSubscription").submit(function(event){
                 event.preventDefault(); //prevent default action 
                     opcion =$("input[name='optradio']:checked").val();
                     valor=$("#valor").val();                      
                     tableConsumo.clear().draw();
+                    tableUser.clear().draw();
+                    tableDispositivos.clear().draw();
+                    tableAlquiler.clear().draw();
                     tableConsumo.ajax.reload();
+                    tableUser.ajax.reload();
+                    tableDispositivos.ajax.reload();
+                    tableAlquiler.ajax.reload();
             });
             
 

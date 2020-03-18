@@ -23,7 +23,7 @@ import model.ExecuteSql;
  *
  * @author LENOVO
  */
-public class GetListSubscriberUserHubClaro extends HttpServlet {
+public class GetListDeviceHubClaro extends HttpServlet {
 
 
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
@@ -72,11 +72,11 @@ public class GetListSubscriberUserHubClaro extends HttpServlet {
         response.setContentType("application/json");
         PrintWriter out = response.getWriter();
         
-        RequestJson requestJson = new RequestJson();
+          RequestJson requestJson = new RequestJson();
         ResultQueryUserResponse responseQueryUserResponse = new ResultQueryUserResponse();
 
         
-        responseQueryUserResponse = requestJson.queryOttSubscriptions("http://172.16.204.189:30100/hubOTT/internal/rest/QueryUserOtt", "GT", email, msisdn,"consultardatoscliente",dateInit,dateFinish);
+        responseQueryUserResponse = requestJson.queryOttDevice("http://172.16.204.189:30100/hubOTT/internal/rest/QueryOtt", "GT", email, msisdn,"consultardispositivoscliente",dateInit,dateFinish);
         
         String description = responseQueryUserResponse.getResponse().getDescription();
         int code = responseQueryUserResponse.getResponse().getCode();

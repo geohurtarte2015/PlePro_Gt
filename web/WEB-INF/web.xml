@@ -124,6 +124,18 @@
         <servlet-name>GetListSubscriberUserHubClaro</servlet-name>
         <servlet-class>view.crud.GetListSubscriberUserHubClaro</servlet-class>
     </servlet>
+    <servlet>
+        <servlet-name>GetListDataUserHubClaro</servlet-name>
+        <servlet-class>view.crud.GetListDataUserHubClaro</servlet-class>
+    </servlet>
+    <servlet>
+        <servlet-name>GetListDeviceHubClaro</servlet-name>
+        <servlet-class>view.crud.GetListDeviceHubClaro</servlet-class>
+    </servlet>
+    <servlet>
+        <servlet-name>GetListRentHubClaro</servlet-name>
+        <servlet-class>view.crud.GetListRentHubClaro</servlet-class>
+    </servlet>
     <servlet-mapping>
         <servlet-name>EndSesion</servlet-name>
         <url-pattern>/EndSesion</url-pattern>
@@ -251,6 +263,18 @@
     <servlet-mapping>
         <servlet-name>GetListSubscriberUserHubClaro</servlet-name>
         <url-pattern>/GetListSubscriberUserHubClaro</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>GetListDataUserHubClaro</servlet-name>
+        <url-pattern>/GetListDataUserHubClaro</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>GetListDeviceHubClaro</servlet-name>
+        <url-pattern>/GetListDeviceHubClaro</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>GetListRentHubClaro</servlet-name>
+        <url-pattern>/GetListRentHubClaro</url-pattern>
     </servlet-mapping>
     <session-config>
         <session-timeout>

@@ -58,5 +58,21 @@
         <delete dir="${build.generated.sources.dir}/jax-ws/clientWebservice"/>
         <delete dir="${build.generated.dir}/jax-wsCache/HubClaroVideo"/>
     </target>
-    <target name="wsimport-client-generate" depends="wsimport-client-PackageCore, wsimport-client-HubClaroVideo"/>
+    <target name="wsimport-client-PackageCore_1" depends="wsimport-init">
+        <mkdir dir="${build.generated.dir}/jax-wsCache/PackageCore_1"/>
+        <wsimport sourcedestdir="${build.generated.dir}/jax-wsCache/PackageCore_1" destdir="${build.generated.dir}/jax-wsCache/PackageCore_1" wsdl="${basedir}/${conf-dir}xml-resources/web-service-references/PackageCore_1/wsdl/172.16.168.143_7006/WS_PLE_BRIDGE_SV/PackageCore.wsdl" catalog="catalog.xml" encoding="${source.encoding}" extension="true" verbose="true" fork="false" wsdlLocation="http://172.16.168.143:7006/WS_PLE_BRIDGE_SV/PackageCore?WSDL" xnocompile="true" xendorsed="true" package="clientWebservice">
+            <depends file="${basedir}/${conf-dir}xml-resources/web-service-references/PackageCore_1/wsdl/172.16.168.143_7006/WS_PLE_BRIDGE_SV/PackageCore.wsdl"/>
+            <produces dir="${build.generated.dir}/jax-wsCache/PackageCore_1"/>
+        </wsimport>
+        <copy todir="${build.generated.sources.dir}/jax-ws">
+            <fileset dir="${build.generated.dir}/jax-wsCache/PackageCore_1">
+                <include name="**/*.java"/>
+            </fileset>
+        </copy>
+    </target>
+    <target name="wsimport-client-clean-PackageCore_1" depends="-init-project">
+        <delete dir="${build.generated.sources.dir}/jax-ws/clientWebservice"/>
+        <delete dir="${build.generated.dir}/jax-wsCache/PackageCore_1"/>
+    </target>
+    <target name="wsimport-client-generate" depends="wsimport-client-PackageCore, wsimport-client-HubClaroVideo, wsimport-client-PackageCore_1"/>
 </project>
