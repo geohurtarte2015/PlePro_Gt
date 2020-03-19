@@ -102,6 +102,48 @@ public class GetWebservice {
         }
                 return responseHttp.toString();
 	}
+    
+    public String  doGetJson(String urlHttp){
+        StringBuilder responseHttp=null;
+		try{    
+             
+                    URL url = new URL(urlHttp);
+                    HttpURLConnection conn = (HttpURLConnection) url.openConnection();
+                    conn.setRequestMethod("GET");
+                    conn.setRequestProperty("Content-Type", "application/json");
+                    conn.setRequestProperty("Accept", "application/json");
+                    conn.setDoOutput(true);
+
+                    
+                    
+                 
+                    int code = conn.getResponseCode();
+                    String response = conn.getResponseMessage();
+                    String message = conn.getHeaderField(7);
+                    
+                    if(code!=200){
+                    System.out.println(code);
+                    return "0";
+                    
+                    }
+          
+                    
+                    try(BufferedReader br = new BufferedReader(new InputStreamReader(conn.getInputStream(), "utf-8"))){
+                        responseHttp = new StringBuilder();
+                        String responseLine = null;
+                        while ((responseLine = br.readLine()) != null) {
+                            responseHttp.append(responseLine.trim());
+                        }
+                        System.out.println(responseHttp.toString());
+                    }
+                } catch (MalformedURLException ex) {
+            Logger.getLogger(GetWebservice.class.getName()).log(Level.SEVERE, null, ex);
+        } catch (IOException ex) {
+            Logger.getLogger(GetWebservice.class.getName()).log(Level.SEVERE, null, ex);
+        }
+                return responseHttp.toString();
+        
+    }
   
     
     }

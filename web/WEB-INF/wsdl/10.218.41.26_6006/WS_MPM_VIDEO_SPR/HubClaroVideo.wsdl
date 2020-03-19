@@ -4,47 +4,94 @@
 <xsd:import namespace="http://ws.com.claro/" schemaLocation="http://10.218.41.26:6006/WS_MPM_VIDEO_SPR/HubClaroVideo?xsd=1"/>
 </xsd:schema>
 <xsd:schema>
-<xsd:import namespace="CONSULT" schemaLocation="http://10.218.41.26:6006/WS_MPM_VIDEO_SPR/HubClaroVideo?xsd=2"/>
-</xsd:schema>
-<xsd:schema>
-<xsd:import namespace="GUI" schemaLocation="http://10.218.41.26:6006/WS_MPM_VIDEO_SPR/HubClaroVideo?xsd=3"/>
+<xsd:import namespace="ACT" schemaLocation="http://10.218.41.26:6006/WS_MPM_VIDEO_SPR/HubClaroVideo?xsd=2"/>
 </xsd:schema>
 </types>
-<message name="getInternalConsulting">
-<part name="parameters" element="tns:getInternalConsulting"/>
+<message name="AccountSuscriberNew">
+<part name="parameters" element="tns:AccountSuscriberNew"/>
 </message>
-<message name="getInternalConsultingResponse">
-<part name="parameters" element="tns:getInternalConsultingResponse"/>
+<message name="AccountSuscriberNewResponse">
+<part name="parameters" element="tns:AccountSuscriberNewResponse"/>
 </message>
-<message name="GGLInvokeParams">
-<part name="parameters" element="tns:GGLInvokeParams"/>
+<message name="AccountStateUpdate">
+<part name="parameters" element="tns:AccountStateUpdate"/>
 </message>
-<message name="GGLInvokeParamsResponse">
-<part name="parameters" element="tns:GGLInvokeParamsResponse"/>
+<message name="AccountStateUpdateResponse">
+<part name="parameters" element="tns:AccountStateUpdateResponse"/>
 </message>
-<message name="GUISuscriberVideo">
-<part name="parameters" element="tns:GUISuscriberVideo"/>
+<message name="emailUpdate">
+<part name="parameters" element="tns:emailUpdate"/>
 </message>
-<message name="GUISuscriberVideoResponse">
-<part name="parameters" element="tns:GUISuscriberVideoResponse"/>
+<message name="emailUpdateResponse">
+<part name="parameters" element="tns:emailUpdateResponse"/>
+</message>
+<message name="AccountBundleStateUpdate">
+<part name="parameters" element="tns:AccountBundleStateUpdate"/>
+</message>
+<message name="AccountBundleStateUpdateResponse">
+<part name="parameters" element="tns:AccountBundleStateUpdateResponse"/>
+</message>
+<message name="AccountSuscriberDown">
+<part name="parameters" element="tns:AccountSuscriberDown"/>
+</message>
+<message name="AccountSuscriberDownResponse">
+<part name="parameters" element="tns:AccountSuscriberDownResponse"/>
+</message>
+<message name="ServiceDesactive">
+<part name="parameters" element="tns:ServiceDesactive"/>
+</message>
+<message name="ServiceDesactiveResponse">
+<part name="parameters" element="tns:ServiceDesactiveResponse"/>
+</message>
+<message name="ServiceActive">
+<part name="parameters" element="tns:ServiceActive"/>
+</message>
+<message name="ServiceActiveResponse">
+<part name="parameters" element="tns:ServiceActiveResponse"/>
+</message>
+<message name="ListAccountSuscriber">
+<part name="parameters" element="tns:ListAccountSuscriber"/>
+</message>
+<message name="ListAccountSuscriberResponse">
+<part name="parameters" element="tns:ListAccountSuscriberResponse"/>
 </message>
 <portType name="SprCore">
-<operation name="getInternalConsulting">
-<input wsam:Action="http://ws.com.claro/SprCore/getInternalConsultingRequest" message="tns:getInternalConsulting"/>
-<output wsam:Action="http://ws.com.claro/SprCore/getInternalConsultingResponse" message="tns:getInternalConsultingResponse"/>
+<operation name="AccountSuscriberNew">
+<input wsam:Action="http://ws.com.claro/SprCore/AccountSuscriberNewRequest" message="tns:AccountSuscriberNew"/>
+<output wsam:Action="http://ws.com.claro/SprCore/AccountSuscriberNewResponse" message="tns:AccountSuscriberNewResponse"/>
 </operation>
-<operation name="GGLInvokeParams">
-<input wsam:Action="http://ws.com.claro/SprCore/GGLInvokeParamsRequest" message="tns:GGLInvokeParams"/>
-<output wsam:Action="http://ws.com.claro/SprCore/GGLInvokeParamsResponse" message="tns:GGLInvokeParamsResponse"/>
+<operation name="AccountStateUpdate">
+<input wsam:Action="http://ws.com.claro/SprCore/AccountStateUpdateRequest" message="tns:AccountStateUpdate"/>
+<output wsam:Action="http://ws.com.claro/SprCore/AccountStateUpdateResponse" message="tns:AccountStateUpdateResponse"/>
 </operation>
-<operation name="GUISuscriberVideo">
-<input wsam:Action="http://ws.com.claro/SprCore/GUISuscriberVideoRequest" message="tns:GUISuscriberVideo"/>
-<output wsam:Action="http://ws.com.claro/SprCore/GUISuscriberVideoResponse" message="tns:GUISuscriberVideoResponse"/>
+<operation name="emailUpdate">
+<input wsam:Action="http://ws.com.claro/SprCore/emailUpdateRequest" message="tns:emailUpdate"/>
+<output wsam:Action="http://ws.com.claro/SprCore/emailUpdateResponse" message="tns:emailUpdateResponse"/>
+</operation>
+<operation name="AccountBundleStateUpdate">
+<input wsam:Action="http://ws.com.claro/SprCore/AccountBundleStateUpdateRequest" message="tns:AccountBundleStateUpdate"/>
+<output wsam:Action="http://ws.com.claro/SprCore/AccountBundleStateUpdateResponse" message="tns:AccountBundleStateUpdateResponse"/>
+</operation>
+<operation name="AccountSuscriberDown">
+<input wsam:Action="http://ws.com.claro/SprCore/AccountSuscriberDownRequest" message="tns:AccountSuscriberDown"/>
+<output wsam:Action="http://ws.com.claro/SprCore/AccountSuscriberDownResponse" message="tns:AccountSuscriberDownResponse"/>
+</operation>
+<operation name="ServiceDesactive">
+<input wsam:Action="http://ws.com.claro/SprCore/ServiceDesactiveRequest" message="tns:ServiceDesactive"/>
+<output wsam:Action="http://ws.com.claro/SprCore/ServiceDesactiveResponse" message="tns:ServiceDesactiveResponse"/>
+</operation>
+<operation name="ServiceActive">
+<input wsam:Action="http://ws.com.claro/SprCore/ServiceActiveRequest" message="tns:ServiceActive"/>
+<output wsam:Action="http://ws.com.claro/SprCore/ServiceActiveResponse" message="tns:ServiceActiveResponse"/>
+</operation>
+<operation name="ListAccountSuscriber">
+<input wsam:Action="http://ws.com.claro/SprCore/ListAccountSuscriberRequest" message="tns:ListAccountSuscriber"/>
+<output wsam:Action="http://ws.com.claro/SprCore/ListAccountSuscriberResponse" message="tns:ListAccountSuscriberResponse"/>
 </operation>
 </portType>
 <binding name="SprCorePortBinding" type="tns:SprCore">
 <soap:binding transport="http://schemas.xmlsoap.org/soap/http" style="document"/>
-<operation name="getInternalConsulting">
+<operation name="AccountSuscriberNew">
 <soap:operation soapAction=""/>
 <input>
 <soap:body use="literal"/>
@@ -53,7 +100,7 @@
 <soap:body use="literal"/>
 </output>
 </operation>
-<operation name="GGLInvokeParams">
+<operation name="AccountStateUpdate">
 <soap:operation soapAction=""/>
 <input>
 <soap:body use="literal"/>
@@ -62,7 +109,52 @@
 <soap:body use="literal"/>
 </output>
 </operation>
-<operation name="GUISuscriberVideo">
+<operation name="emailUpdate">
+<soap:operation soapAction=""/>
+<input>
+<soap:body use="literal"/>
+</input>
+<output>
+<soap:body use="literal"/>
+</output>
+</operation>
+<operation name="AccountBundleStateUpdate">
+<soap:operation soapAction=""/>
+<input>
+<soap:body use="literal"/>
+</input>
+<output>
+<soap:body use="literal"/>
+</output>
+</operation>
+<operation name="AccountSuscriberDown">
+<soap:operation soapAction=""/>
+<input>
+<soap:body use="literal"/>
+</input>
+<output>
+<soap:body use="literal"/>
+</output>
+</operation>
+<operation name="ServiceDesactive">
+<soap:operation soapAction=""/>
+<input>
+<soap:body use="literal"/>
+</input>
+<output>
+<soap:body use="literal"/>
+</output>
+</operation>
+<operation name="ServiceActive">
+<soap:operation soapAction=""/>
+<input>
+<soap:body use="literal"/>
+</input>
+<output>
+<soap:body use="literal"/>
+</output>
+</operation>
+<operation name="ListAccountSuscriber">
 <soap:operation soapAction=""/>
 <input>
 <soap:body use="literal"/>

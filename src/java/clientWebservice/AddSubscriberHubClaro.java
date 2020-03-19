@@ -4,14 +4,11 @@ package clientWebservice;
 
 public class AddSubscriberHubClaro {
 
-    public RepuestaInvokeParams guiSuscriberVideo(java.lang.String phone, clientWebservice.GuiParameter parameters) {
+    public  TbHUBSUBSCRIBER listAccountSuscriber(java.lang.String customerId, java.lang.String token, java.lang.String phone) {
         clientWebservice.HubClaroVideo service = new clientWebservice.HubClaroVideo();
-        clientWebservice.SprCore port = service.getSprCorePort();        
-        return port.guiSuscriberVideo(phone, parameters);
+        clientWebservice.SprCore port = service.getSprCorePort();
+        return port.listAccountSuscriber(customerId, token, phone);
     }
-    
-    
-    
-    
+
     
 }

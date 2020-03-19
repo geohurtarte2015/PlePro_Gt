@@ -49,7 +49,7 @@ public class Configuration {
         poolCatalog="JDBC/PLEGT";
         poolProgram="";
         poolPos="";
-        wsdlLocation="http://172.16.168.143:7006/WS_PLE_BRIDGE_SV/PackageCore?WSDL";
+        wsdlLocation="http://172.16.168.143:7003/WS_PLE_BRIDGE_GT/PackageCore?WSDL";
         urlPos1="http://172.16.168.139:7003/wsValidatorPOS/webresources/validate/loadData";
         urlPos2="http://172.16.168.138:7003/wsValidatorPOS/webresources/validate/loadData";
     }

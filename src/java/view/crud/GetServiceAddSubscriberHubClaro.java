@@ -7,7 +7,8 @@ package view.crud;
 
 import clientWebservice.AddPackResponse;
 import clientWebservice.AddSubscriberHubClaro;
-import clientWebservice.RepuestaInvokeParams;
+import clientWebservice.TbHUBSUBSCRIBER;
+//import clientWebservice.RepuestaInvokeParams;
 import java.io.IOException;
 import java.io.PrintWriter;
 import javax.servlet.ServletException;
@@ -48,7 +49,7 @@ public class GetServiceAddSubscriberHubClaro extends HttpServlet {
     @Override
     protected void doPost(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-        RepuestaInvokeParams responseParams = null;
+        TbHUBSUBSCRIBER dataUser = null;
         String phone = String.valueOf(request.getParameter("msisdn"));
         String email = String.valueOf(request.getParameter("email"));
         String name = String.valueOf(request.getParameter("name"));
@@ -57,33 +58,37 @@ public class GetServiceAddSubscriberHubClaro extends HttpServlet {
         String codeArea = "502";
         String productId = String.valueOf(request.getParameter("OptionProduct"));
         
+        String token="";
+  
         
         
-        AddSubscriberHubClaro addSubscriberHubClaro = new AddSubscriberHubClaro();
         
-        clientWebservice.GuiParameter parameters = new clientWebservice.GuiParameter();
-        parameters.setName(name);
-        parameters.setLastName(lastName);
-        parameters.setChannel(Integer.parseInt(channel));
-        parameters.setCodeArea(codeArea);
-        parameters.setEmail(email);
-        parameters.setProductId(productId);
+          AddSubscriberHubClaro addSubscriberHubClaro = new AddSubscriberHubClaro();
+          dataUser = addSubscriberHubClaro.listAccountSuscriber("", "", phone);
+          
+          
+                  
+//        clientWebservice.GuiParameter parameters = new clientWebservice.GuiParameter();
+//        parameters.setName(name);
+//        parameters.setLastName(lastName);
+//        parameters.setChannel(Integer.parseInt(channel));
+//        parameters.setCodeArea(codeArea);
+//        parameters.setEmail(email);
+//        parameters.setProductId(productId);
 
 
       
     
         
-         responseParams = addSubscriberHubClaro.guiSuscriberVideo(phone, parameters);
+         //responseParams = addSubscriberHubClaro.guiSuscriberVideo(phone, parameters);
         
-        //AddPackResponse addPackresponse = new AddPackResponse();
-        //int val = addPackresponse.addPackageCorePle(msisdn, "GUI", keyword, "");
-      
+   
     
         
         JSONObject json = new JSONObject();
-        json.put("code", responseParams.getStatus());
-        json.put("message", String.valueOf(responseParams.getDescription()));
-        json.put("type", responseParams.getTipo());
+        json.put("code", 0);
+        json.put("message", "Mensaje respuesta");
+        json.put("type", 0);
         response.setContentType("application/json");
         response.getWriter().write(json.toString());
         

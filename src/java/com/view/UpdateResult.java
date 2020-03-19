@@ -73,14 +73,7 @@ public class UpdateResult extends HttpServlet {
  
        String [] arraySentences = null;
        
-         //Response webservice and parse response
-           GetWebservice webservice = new GetWebservice();
-           String responseWebservice = webservice.doPost(configuration.getUrlPos1());  
-           String responseWebservice2 = webservice.doPost(configuration.getUrlPos2());  
-           String[] parseResponse = responseWebservice.replaceAll("\\<.*?>"," ").trim().split(" ");
-           String[] parseResponse2 = responseWebservice2.replaceAll("\\<.*?>"," ").trim().split(" ");
-           String responseHttp = parseResponse[0];
-           String responseHttp2 = parseResponse2[0];
+      
        
     
         dateFinish = String.valueOf(request.getParameter("datefinish"));
@@ -178,6 +171,15 @@ public class UpdateResult extends HttpServlet {
 
 
         Result responseUpdate = daoObject.insertSql(arraySentences);
+        
+           //Response webservice and parse response
+           GetWebservice webservice = new GetWebservice();
+           String responseWebservice = webservice.doPost(configuration.getUrlPos1());  
+           String responseWebservice2 = webservice.doPost(configuration.getUrlPos2());  
+           String[] parseResponse = responseWebservice.replaceAll("\\<.*?>"," ").trim().split(" ");
+           String[] parseResponse2 = responseWebservice2.replaceAll("\\<.*?>"," ").trim().split(" ");
+           String responseHttp = parseResponse[0];
+           String responseHttp2 = parseResponse2[0];
     
     
     //auditory  
