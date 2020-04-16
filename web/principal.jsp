@@ -6,8 +6,8 @@
         String apellido = (String) session.getAttribute("apellido");
         String rol = (String) session.getAttribute("rol");
             
-        
-        
+            
+            
             String displaySegmentacion = "display:block";
             String displayClaroVideo = "display:block";
             String display1 = "display:block";
@@ -17,13 +17,15 @@
             String display5 = "display:block";
             String display6 = "display:block";
             String display7 = "display:block";
+            String display8 = "display:block";
             
             
             int selectRol = Integer.parseInt(rol);
-            
-            switch (selectRol){
-             
-                case 2:         
+          
+                switch (selectRol) {
+
+                    case 2:
+                        displayClaroVideo = "display:none";
                         displaySegmentacion = "display:none";
                         display2 = "display:none";
                         display3 = "display:none";
@@ -31,47 +33,52 @@
                         display5 = "display:none";
                         display6 = "display:none";
                         break;
-                case 3:
-                        display1 = "display:none"; 
-                        display5 = "display:none";          
-                        display6 = "display:none"; 
-                    break;      
-                 case 4:
-                        display5 = "display:none";    
-                        break; 
-                 case 5:
+                    case 3:
+                        displayClaroVideo = "display:none";
+                        display1 = "display:none";
+                        display5 = "display:none";
+                        display6 = "display:none";
+                        break;
+                    case 4:
+                        displayClaroVideo = "display:none";
+                        display5 = "display:none";
+                        break;
+                    case 5:
+                        displayClaroVideo = "display:none";
                         displaySegmentacion = "display:none";
-                        display1 = "display:none"; 
+                        display1 = "display:none";
                         display2 = "display:none";
                         display3 = "display:none";
                         display4 = "display:none";
                         display6 = "display:none";
-                        break; 
-                case 6:
+                        break;
+                    case 6:
+                        displayClaroVideo = "display:none";
                         displaySegmentacion = "display:none";
-                        display1 = "display:none"; 
+                        display1 = "display:none";
                         display2 = "display:none";
                         display3 = "display:none";
                         display4 = "display:none";
                         display5 = "display:none";
-                        break; 
-                case 7:  
+                        break;
+                    case 7:
+                        displayClaroVideo = "display:none";
                         displaySegmentacion = "display:none";
                         display2 = "display:none";
                         display3 = "display:none";
                         display4 = "display:none";
-                        display5 = "display:none";         
-                        break; 
-                case 8:
+                        display5 = "display:none";
+                        break;
+                    case 8:
                         displaySegmentacion = "display:none";
-                        display1 = "display:none"; 
+                        display1 = "display:none";
                         display2 = "display:none";
                         display3 = "display:none";
                         display4 = "display:none";
                         display5 = "display:none";
                         display6 = "display:none";
-                        break; 
-            }
+                        break;
+                }
                    
 %>
 
@@ -182,7 +189,8 @@
                  
                           <li style="<%=display3%>"><a href="creacion.jsp">Carga de clientes POS</a></li> 
                           <li style="<%=display4%>"><a href="eliminar.jsp">Eliminar clientes POS</a></li>  
-                          <li style="<%=display7%>"><a href="mantenimiento.jsp">Mantenimiento clientes POS</a></li>  
+                          <li style="<%=display7%>"><a href="mantenimiento.jsp">Mantenimiento clientes POS</a></li> 
+                       
                          
                       </ul>
                   </li>
@@ -193,10 +201,10 @@
                   </li>
                    <li style="<%=displayClaroVideo%>"><a><i class="fa fa-play-circle"></i>Gestión Claro Video <span class="fa fa-chevron-down"></span></a>
                       <ul class="nav child_menu">
-                          <li><a href="altasUsuarioHubClaro.jsp">Alta de usuario</a></li> 
-                          <li><a href="consultaConsumosHubClaro.jsp">Consulta consumos</a></li> 
-                          <li><a href="cambioCuenta.jsp">Cuentas</a></li> 
-                          <li><a href="consultaReportes.jsp">Reportes</a></li>                
+                          <li><a href="ClaroVideo/altasUsuarioHubClaro.jsp">Alta de usuario</a></li> 
+                          <li><a href="ClaroVideo/consultaConsumosHubClaro.jsp">Consulta consumos</a></li> 
+                          <li><a href="ClaroVideo/cambioCuenta.jsp">Cuentas</a></li> 
+                          <li><a href="ClaroVideo/consultaReportes.jsp">Reportes</a></li>                
                       </ul>
                     </li>
                 </ul>

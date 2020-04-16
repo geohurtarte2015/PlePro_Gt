@@ -22,26 +22,28 @@
   
 
        <!-- DatePick -->
-    <link href="plantilla/bootdate/build/css/bootstrap-datetimepicker.css" rel="stylesheet">
+    <link href="../plantilla/bootdate/build/css/bootstrap-datetimepicker.css" rel="stylesheet">
     
     <!-- Bootstrap -->
-    <link href="plantilla/vendors/bootstrap/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link href="../plantilla/vendors/bootstrap/dist/css/bootstrap.min.css" rel="stylesheet">
     <!-- Font Awesome -->
-    <link href="plantilla/vendors/font-awesome/css/font-awesome.min.css" rel="stylesheet">
+    <link href="../plantilla/vendors/font-awesome/css/font-awesome.min.css" rel="stylesheet">
     <!-- NProgress -->
-    <link href="plantilla/vendors/nprogress/nprogress.css" rel="stylesheet">
+    <link href="../plantilla/vendors/nprogress/nprogress.css" rel="stylesheet">
     <!-- iCheck -->
-    <link href="plantilla/vendors/iCheck/skins/flat/green.css" rel="stylesheet">
+    <link href="../plantilla/vendors/iCheck/skins/flat/green.css" rel="stylesheet">
     <!-- Datatables -->
-    <link href="plantilla/vendors/datatables.net-bs/css/dataTables.bootstrap.min.css" rel="stylesheet">
-    <link href="plantilla/vendors/datatables.net-buttons-bs/css/buttons.bootstrap.min.css" rel="stylesheet">
-    <link href="plantilla/vendors/datatables.net-fixedheader-bs/css/fixedHeader.bootstrap.min.css" rel="stylesheet">
-    <link href="plantilla/vendors/datatables.net-responsive-bs/css/responsive.bootstrap.min.css" rel="stylesheet">
+    <link href="../plantilla/vendors/datatables.net-bs/css/dataTables.bootstrap.min.css" rel="stylesheet">
+    <link href="../plantilla/vendors/datatables.net-buttons-bs/css/buttons.bootstrap.min.css" rel="stylesheet">
+    <link href="../plantilla/vendors/datatables.net-fixedheader-bs/css/fixedHeader.bootstrap.min.css" rel="stylesheet">
+    <link href="../plantilla/vendors/datatables.net-responsive-bs/css/responsive.bootstrap.min.css" rel="stylesheet">
 
+        <!-- Alert Bootbox -->
+    <script src="../plantilla/bootbox/bootbox.min.js"></script> 
     
 
     <!-- Custom Theme Style -->
-    <link href="plantilla/build/css/custom.min.css" rel="stylesheet">
+    <link href="../plantilla/build/css/custom.min.css" rel="stylesheet">
     
     <!-- Style Modal -->
  
@@ -85,55 +87,62 @@
             
             switch (selectRol){
              
-                case 2:         
-                        displaySegmentacion = "display:none";
-                        display2 = "display:none";
-                        display3 = "display:none";
-                        display4 = "display:none";
-                        display5 = "display:none";
-                        display6 = "display:none";
-                        break;
-                case 3:
-                        display1 = "display:none"; 
-                        display5 = "display:none";          
-                        display6 = "display:none"; 
-                    break;      
-                 case 4:
-                        display5 = "display:none";                  
-                        break; 
-                 case 5:
-                        displaySegmentacion = "display:none";
-                        display1 = "display:none"; 
-                        display2 = "display:none";
-                        display3 = "display:none";
-                        display4 = "display:none";
-                        display6 = "display:none";
-                        break; 
-                case 6:
-                        displaySegmentacion = "display:none";
-                        display1 = "display:none"; 
-                        display2 = "display:none";
-                        display3 = "display:none";
-                        display4 = "display:none";
-                        display5 = "display:none";
-                        break; 
-                case 7:
-                       displaySegmentacion = "display:none";
-                        display2 = "display:none";
-                        display3 = "display:none";
-                        display4 = "display:none";
-                        display5 = "display:none";
-                        break;  
-                case 8:
-                        displaySegmentacion = "display:none";
-                        display1 = "display:none"; 
-                        display2 = "display:none";
-                        display3 = "display:none";
-                        display4 = "display:none";
-                        display5 = "display:none";
-                        display6 = "display:none";
-                        break; 
-            }
+                     case 2:
+                         displaySegmentacion = "display:none";
+                         display2 = "display:none";
+                         display3 = "display:none";
+                         display4 = "display:none";
+                         display5 = "display:none";
+                         display6 = "display:none";
+                         response.sendRedirect("../principal.jsp");
+                         break;
+                     case 3:
+                         display1 = "display:none";
+                         display5 = "display:none";
+                         display6 = "display:none";
+                         response.sendRedirect("../principal.jsp");
+                         break;
+                     case 4:
+                         display5 = "display:none";
+                         response.sendRedirect("../principal.jsp");
+                         break;
+                     case 5:
+                         displaySegmentacion = "display:none";
+                         display1 = "display:none";
+                         display2 = "display:none";
+                         display3 = "display:none";
+                         display4 = "display:none";
+                         display6 = "display:none";
+                         response.sendRedirect("../principal.jsp");
+                         break;
+                     case 6:
+                         displaySegmentacion = "display:none";
+                         display1 = "display:none";
+                         display2 = "display:none";
+                         display3 = "display:none";
+                         display4 = "display:none";
+                         display5 = "display:none";
+                         response.sendRedirect("../principal.jsp");
+                         break;
+                     case 7:
+                         displaySegmentacion = "display:none";
+                         display2 = "display:none";
+                         display3 = "display:none";
+                         display4 = "display:none";
+                         display5 = "display:none";
+                         response.sendRedirect("../principal.jsp");
+                         break;
+                     case 8:
+                         displaySegmentacion = "display:none";
+                         display1 = "display:none";
+                         display2 = "display:none";
+                         display3 = "display:none";
+                         display4 = "display:none";
+                         display5 = "display:none";
+                         display6 = "display:none";
+
+                         break;
+                 }
                    
 %>
          
@@ -181,27 +190,27 @@
                   </li>-->
                     <li style="<%=display1%>"><a><i class="fa fa-cogs"></i> Catalogos <span class="fa fa-chevron-down"></span></a>
                       <ul class="nav child_menu">
-                          <li><a href="configuracion.jsp">Configuracion</a></li>  
-                          <li><a href="aprovisionarpacks.jsp">Aprovisionar</a></li> 
+                          <li><a href="../configuracion.jsp">Configuracion</a></li>  
+                          <li><a href="../aprovisionarpacks.jsp">Aprovisionar</a></li> 
                       </ul>
                   </li>
                   <li style="<%=display6%>"><a><i class="fa fa-home"></i> Consultas <span class="fa fa-chevron-down"></span></a>
                     <ul class="nav child_menu">
-                      <li><a href="aprovisionamiento.jsp">Consulta aprovisionamientos</a></li>  
-                      <li><a href="notification.jsp">Consulta notificaciones</a></li>  
+                      <li><a href="../aprovisionamiento.jsp">Consulta aprovisionamientos</a></li>  
+                      <li><a href="../notification.jsp">Consulta notificaciones</a></li>  
                      <!--  <li><a href="modificacion.jsp">Modificaciones</a></li>   -->
                     </ul>
                   </li>
                   <li style="<%=displaySegmentacion%>"><a><i class="fa fa-mobile"></i>Focalizada POS <span class="fa fa-chevron-down"></span></a>
                       <ul class="nav child_menu">                              
-                          <li style="<%=display3%>"><a href="creacion.jsp">Carga de clientes POS</a></li> 
-                          <li style="<%=display4%>"><a href="eliminar.jsp">Eliminar clientes POS</a></li>   
-                          <li style="<%=display7%>"><a href="mantenimiento.jsp">Mantenimiento clientes POS</a></li>
+                          <li style="<%=display3%>"><a href="../creacion.jsp">Carga de clientes POS</a></li> 
+                          <li style="<%=display4%>"><a href="../eliminar.jsp">Eliminar clientes POS</a></li>   
+                          <li style="<%=display7%>"><a href="../mantenimiento.jsp">Mantenimiento clientes POS</a></li>
                       </ul>
                   </li>
                   <li style="<%=display5%>"><a><i class="fa fa-user-plus"></i> Administración <span class="fa fa-chevron-down"></span></a>
                       <ul class="nav child_menu">
-                          <li><a href="userManagement.jsp">Usuarios y Perfiles</a></li>                     
+                          <li><a href="../userManagement.jsp">Usuarios y Perfiles</a></li>                     
                       </ul>
                   </li>
                    <li style="<%=displayClaroVideo%>"><a><i class="fa fa-play-circle"></i>Gestión Claro Video <span class="fa fa-chevron-down"></span></a>
@@ -236,7 +245,7 @@
                     <span class=" fa fa-angle-down"></span>
                   </a>
                   <ul class="dropdown-menu dropdown-usermenu pull-right">                    
-                    <li><a href="EndSesion"><i class="fa fa-sign-out pull-right"></i> Salir</a></li>
+                    <li><a href="../EndSesion"><i class="fa fa-sign-out pull-right"></i> Salir</a></li>
                   </ul>
                 </li>
          
@@ -325,6 +334,20 @@
                                
                              </div>
                             </form>
+
+                            <div id="message">
+                                <div class="progress">
+                                    <div id="progressId" class="progress-bar" role="progressbar" aria-valuenow="60" aria-valuemin="0" aria-valuemax="100" style="width: 0%;">
+                              
+                                    </div>
+                             
+                                </div>   
+                                
+                               
+                            </div>
+
+                            </div>
+                        </div>
                  
                   <br />
                   
@@ -333,7 +356,8 @@
                           <div class="panel-heading">
                               <h4 class="panel-title">
                                   <a data-toggle="collapse" data-parent="#accordion" href="#collapse1">
-                                      Datos del Usuario</a>
+                                      Datos del Usuario
+                                  </a>
                               </h4>
                           </div>
                           <div id="collapse1" class="panel-collapse collapse in">
@@ -352,6 +376,10 @@
                                                           <th>Id. Usuario</th>    
                                                           <th>Medio de Pago</th>          
                                                           <th>No.Cuenta</th>  
+                                                          <th>Editar</th>  
+                                                          <th>Alta</th> 
+                                                          <th>Baja</th> 
+                                                     
                                                       </tr>
                                                   </thead>
                                                   <tfoot>
@@ -361,7 +389,10 @@
                                                           <th>Apellido</th>
                                                           <th>Id. Usuario</th>    
                                                           <th>Medio de Pago</th>          
-                                                          <th>No.Cuenta</th>  
+                                                          <th>No.Cuenta</th> 
+                                                          <th>Editar</th> 
+                                                          <th>Alta</th> 
+                                                          <th>Baja</th> 
                                                       </tr>
                                                   </tfoot>
                                               </table>
@@ -450,7 +481,7 @@
                                     <div class="col-lg-12">
                                       <div class="panel-body">
                                           <div class="table-responsive">
-                                              <table id="TABLEAlQUILERCV" class="table table-striped table-bordered table-hover" cellspacing="0" width="100%">  
+                                              <table id="TABLEALQUILERCV" class="table table-striped table-bordered table-hover" cellspacing="0" width="100%">  
                                                   <thead>
                                                       <tr>
                                                           <th>Titulo</th>
@@ -507,20 +538,20 @@
                                               <table id="TABLEDISPOSITIVOSCV" class="table table-striped table-bordered table-hover" cellspacing="0" width="100%">  
                                                   <thead>
                                                       <tr>
-                                                          <th>Dispositivo</th>
-                                                          <th>Nombre</th>
-                                                          <th>Product ID/Serial</th>
+                                                          <th>Id Dispositivo</th>
+                                                          <th>Tipo de Dispositivo</th>
+                                                          <th>Nombre de Dispositivo</th>
                                                           <th>Fecha Activación</th>
                                                           <th>Acciones</th>                                                    
                                                       </tr>
                                                   </thead>
                                                   <tfoot>
                                                       <tr>
-                                                          <th>Dispositivo</th>
-                                                          <th>Nombre</th>
-                                                          <th>Product ID/Serial</th>
+                                                          <th>Id Dispositivo</th>
+                                                          <th>Tipo de Dispositivo</th>
+                                                          <th>Nombre de Dispositivo</th>
                                                           <th>Fecha Activación</th>
-                                                          <th>Acciones</th>    
+                                                          <th>Acciones</th>     
                                                       </tr>
                                                   </tfoot>
                                               </table>
@@ -544,21 +575,7 @@
                   
                   
                   
-                  <div class="col-lg-12">
-                      <div class="panel-body">
-                          <div class="table-responsive"> 
-                              <div id="message" class="alert alert-success alert-dismissible fade in" role="alert">
-                                  <button type="button" class="close" data-dismiss="alert">
-                                  </button>
-                                  <strong>Mensaje</strong> Cargando los datos, ¡espere un momento porfavor!.
-                              </div>
-
-
-
-                          </div>
-                      </div>
-                  </div>
-                
+              
 
 
               </div>
@@ -571,14 +588,74 @@
         
         
         <!-- Modal -->
-    <div class="modal fade" id="myModal" role="dialog">
-    <div class="modal-dialog">
-        
-    
-   
-      
-    </div>
-  </div> 
+        <div style="display: none;" class="modal fade" id="myModalEdit" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+            <div class="modal-dialog">
+                <div class="modal-content">
+                    
+                <div class="modal-header" style="padding:35px 50px;">
+                    <button type="button" class="close" data-dismiss="modal">&times;</button>
+                    <h4><span class="glyphicon glyphicon-lock"></span> Edicion de datos</h4>
+                </div>
+                    
+                    
+             <div class="modal-body">
+                <div class="panel panel-default">
+                    <div class="panel-heading">Modificación</div>
+                    <div class="panel-body">
+                        <div class="well well-sm">
+                        <form method="post" id="form_serviceUpdateEmail">
+                            <div class="form-group row">
+                            <label for="inputEmail" class="col-sm-2 col-form-label">Email</label>
+                                <div class="col-sm-10">
+                                    <input type="text" class="form-control" id="inputEmail" placeholder="Email">
+                                </div>    
+                            </div>
+                            <button type="submit" id="emailBtn" class="btn btn-primary mb-2">Confirmar</button>
+                        </form>
+                   
+                        </div>
+                        <div class="well well-sm">
+                        <form method="post" id="form_serviceUpdateName">
+                            <div class="form-group row">
+                                <label for="staticEmail" class="col-sm-2 col-form-label">Nombre</label>
+                                 <div class="col-sm-10">
+                                    <input type="text" class="form-control" id="inputNombre" placeholder="Nombre">
+                                </div>
+                            </div>
+                            <div class="form-group row">
+                                <label for="inputPassword" class="col-sm-2 col-form-label">Apellido</label>
+                                <div class="col-sm-10">
+                                    <input type="text" class="form-control" id="inputApellido" placeholder="Apellido">
+                                </div>
+                            </div>
+                            <div class="form-group row">
+                                <div class="col-sm-10">
+                                    <button type="submit" class="btn btn-primary mb-2">Confirmar</button>
+                                </div>
+                            </div>
+            
+                        </form>
+                        </div>
+                        <div class="well well-sm">
+                            <form method="post" id="form_serviceUpdatePassword">
+                                <div class="form-group row">
+                                    <label for="inputPassword" class="col-sm-2 col-form-label">Renovación Password</label>  
+                                     <div class="col-sm-10">
+                                        <button type="submit" class="btn btn-primary mb-2">Confirmar</button>
+                                    </div>
+                                </div>
+                            </form>      
+                        </div>
+                        
+                    </div>
+                </div>
+                </div>
+                </div>
+                
+
+
+            </div>
+        </div> 
         <!-- /page content -->
 
         <!-- footer content -->
@@ -590,47 +667,48 @@
         </footer>
         <!-- /footer content -->
       </div>
-    </div>
+
 
       <!-- DatePick -->
-    <script src="plantilla/js/jquery-1.9.1.min.js"></script>            
+    <script src="../plantilla/js/jquery-1.9.1.min.js"></script>            
                 
     <!-- bootstrap-daterangepicker -->
-    <script src="plantilla/vendors/moment/min/moment.min.js"></script>
-    <script src="plantilla/bootdate/src/js/bootstrap-datetimepicker.js"></script>  
+    <script src="../plantilla/vendors/moment/min/moment.min.js"></script>
+    <script src="../plantilla/bootdate/src/js/bootstrap-datetimepicker.js"></script>  
   
     <!-- Bootstrap -->
-    <script src="plantilla/vendors/bootstrap/dist/js/bootstrap.min.js"></script>
+    <script src="../plantilla/vendors/bootstrap/dist/js/bootstrap.min.js"></script>
     <!-- FastClick -->
-    <script src="plantilla/vendors/fastclick/lib/fastclick.js"></script>
+    <script src="../plantilla/vendors/fastclick/lib/fastclick.js"></script>
     <!-- NProgress -->
-    <script src="plantilla/vendors/nprogress/nprogress.js"></script>
+    <script src="../plantilla/vendors/nprogress/nprogress.js"></script>
     <!-- iCheck -->
-    <script src="plantilla/vendors/iCheck/icheck.min.js"></script>
+    <script src="../plantilla/vendors/iCheck/icheck.min.js"></script>
     <!-- Datatables -->
-    <script src="plantilla/vendors/datatables.net/js/jquery.dataTables.min.js"></script>
-    <script src="plantilla/vendors/datatables.net-bs/js/dataTables.bootstrap.min.js"></script>
-    <script src="plantilla/vendors/datatables.net-buttons/js/dataTables.buttons.min.js"></script>
-    <script src="plantilla/vendors/datatables.net-buttons-bs/js/buttons.bootstrap.min.js"></script>
-    <script src="plantilla/vendors/datatables.net-buttons/js/buttons.flash.min.js"></script>
-    <script src="plantilla/vendors/datatables.net-buttons/js/buttons.html5.min.js"></script>
-    <script src="plantilla/vendors/datatables.net-buttons/js/buttons.print.min.js"></script>
-    <script src="plantilla/vendors/datatables.net-fixedheader/js/dataTables.fixedHeader.min.js"></script>
-    <script src="plantilla/vendors/datatables.net-keytable/js/dataTables.keyTable.min.js"></script>
-    <script src="plantilla/vendors/datatables.net-responsive/js/dataTables.responsive.min.js"></script>
-    <script src="plantilla/vendors/datatables.net-responsive-bs/js/responsive.bootstrap.js"></script>
-    <script src="plantilla/vendors/jszip/dist/jszip.min.js"></script>
-    <script src="plantilla/vendors/pdfmake/build/pdfmake.min.js"></script>
-    <script src="plantilla/vendors/pdfmake/build/vfs_fonts.js"></script>
+    <script src="../plantilla/vendors/datatables.net/js/jquery.dataTables.min.js"></script>
+    <script src="../plantilla/vendors/datatables.net-bs/js/dataTables.bootstrap.min.js"></script>
+    <script src="../plantilla/vendors/datatables.net-buttons/js/dataTables.buttons.min.js"></script>
+    <script src="../plantilla/vendors/datatables.net-buttons-bs/js/buttons.bootstrap.min.js"></script>
+    <script src="../plantilla/vendors/datatables.net-buttons/js/buttons.flash.min.js"></script>
+    <script src="../plantilla/vendors/datatables.net-buttons/js/buttons.html5.min.js"></script>
+    <script src="../plantilla/vendors/datatables.net-buttons/js/buttons.print.min.js"></script>
+    <script src="../plantilla/vendors/datatables.net-fixedheader/js/dataTables.fixedHeader.min.js"></script>
+    <script src="../plantilla/vendors/datatables.net-keytable/js/dataTables.keyTable.min.js"></script>
+    <script src="../plantilla/vendors/datatables.net-responsive/js/dataTables.responsive.min.js"></script>
+    <script src="../plantilla/vendors/datatables.net-responsive-bs/js/responsive.bootstrap.js"></script>
+    <script src="../plantilla/vendors/jszip/dist/jszip.min.js"></script>
+    <script src="../plantilla/vendors/pdfmake/build/pdfmake.min.js"></script>
+    <script src="../plantilla/vendors/pdfmake/build/vfs_fonts.js"></script>
 
     <!-- Custom Theme Scripts -->
-    <script src="plantilla/build/js/custom.min.js"></script>
+    <script src="../plantilla/build/js/custom.min.js"></script>
   
 
     
      <script type="text/javascript">
       var id;
       var rol;
+      var progress=0;
         
       var dateinit="";  
       var datefinish="";
@@ -652,16 +730,31 @@
                     });
 
         
-        $(document).ready(function(){          
+        $(document).ready(function(){      
+        
+        function barProgress(val){
+                 progress=progress+val;
+                 document.getElementById("progressId").style.width = progress+"%";
+                 $("#progressId").text(progress+"%");
+        }
+        
+   
             
-        var tableConsumo= $('#TABLECONSUMOCV').DataTable( {
+        var tableConsumo= $('#TABLECONSUMOCV').DataTable( {           
                             "ajax" : {
-                            "url": "GetListSubscriberUserHubClaro",
+                            "url": "../GetListSubscriberUserHubClaro",
                             "type": "POST",
                             "data" : function(d){                            
                                              d.option=opcion;
                                              d.valor=valor; 
-                                            }              
+                                             d.dateinit=dateinit;
+                                             d.datefinish=datefinish;
+                                            },
+                                    "complete" : function(response){
+                                       
+                                        barProgress(20);    
+                                  
+                                    }              
                              },           
                             "global" : false,
                             "lengthMenu": [[ 4, -1], [ 4,20,"All"]],
@@ -685,12 +778,15 @@
         
         var tableDispositivos= $('#TABLEDISPOSITIVOSCV').DataTable( {
                             "ajax" : {
-                            "url": "GetListDeviceHubClaro",
+                            "url": "../GetListDeviceHubClaro",
                             "type": "POST",
                             "data" : function(d){                            
                                              d.option=opcion;
                                              d.valor=valor; 
-                                            }              
+                                            },
+                                    "complete" : function(response){                                       
+                                        barProgress(20); 
+                                    }              
                              }, 
                             "global" : false,
                             "lengthMenu": [[ 4, -1], [ 4,20,"All"]],
@@ -710,13 +806,18 @@
                     
         var tableUser= $('#TABLEUSERCV').DataTable( {    
                             "ajax" : {
-                            "url": "GetListDataUserHubClaro",
+                            "url": "../GetListDataUserHubClaro",
                             "type": "POST",
                             "data" : function(d){                            
                                              d.option=opcion;
                                              d.valor=valor; 
-                                            }              
-                             }, 
+                                             d.dateinit=dateinit;
+                                             d.datefinish=datefinish;
+                                            },
+                                    "complete" : function(response){                                   
+                                     barProgress(20); 
+                                    }              
+                             },
                             "global" : false,
                             "lengthMenu": [[ 4, -1], [ 4,20,"All"]],
                             "dataType" : "json",
@@ -731,10 +832,44 @@
                                     {"title": "Id. Usuario"}, 
                                     {"title": "Medio de Pago"}, 
                                     {"title": "No.Cuenta"}
-                            ]
+                            ],
+                                    "columnDefs": [
+                                        {
+                                            "targets": 6,
+                                            "data": null,
+                                            "defaultContent": "<center><a href='#' id='updateCuenta' data-toggle='tooltip' data-placement='top' title='Editar datos'>" +
+                                                    "<img  src='../img/pencil.png' width='16' height='16'  border='0' />" +
+                                                    "</a></center>"
+                                        },
+                                        {
+                                            "targets": 7,
+                                            "data": null,
+                                            "defaultContent": "<center><a href='#' id='addCuenta' data-toggle='tooltip' data-placement='top' title='Altas'>" +
+                                                    "<img  src='../img/add.png' width='16' height='16'  border='0' />" +
+                                                    "</a></center>"
+                                        },
+                                        {
+                                            "targets": 8,
+                                            "data": null,
+                                            "defaultContent": "<center><a href='#' id='deleteCuenta' data-toggle='tooltip' data-placement='top' title='Bajas'>" +
+                                                    "<img  src='../img/remove.png' width='16' height='16'  border='0' />" +
+                                                    "</a></center>"
+                                        }
+                                    ]
                     });
                     
-        var tableAlquiler= $('#TABLEAlQUILERCV').DataTable( {                                 
+        var tableAlquiler= $('#TABLEALQUILERCV').DataTable( {
+                            "ajax" : {
+                            "url": "../GetListRentHubClaro",
+                            "type": "POST",
+                            "data" : function(d){                            
+                                             d.option=opcion;
+                                             d.valor=valor; 
+                                            },
+                                    "complete" : function(response){                                    
+                                     barProgress(20); 
+                                    }              
+                             }, 
                             "global" : false,
                             "lengthMenu": [[ 4, -1], [ 4,20,"All"]],
                             "dataType" : "json",
@@ -756,28 +891,221 @@
                     });
               
             
-           $("#form_serviceGetSubscription").submit(function(event){
-                event.preventDefault(); //prevent default action 
-                    opcion =$("input[name='optradio']:checked").val();
-                    valor=$("#valor").val();                      
-                    tableConsumo.clear().draw();
+        $("#form_serviceGetSubscription").submit(function(event){
+            
+             
+                    event.preventDefault(); //prevent default action 
+                   
                     tableUser.clear().draw();
                     tableDispositivos.clear().draw();
                     tableAlquiler.clear().draw();
+                    tableConsumo.clear().draw();
+                
+                    progress=0;  
+                    barProgress(0);
+              
+                    dateinit=$("#fechainicioDatotxt").val();
+                    datefinish=$("#fechafinalDatotxt").val();
+                    opcion =$("input[name='optradio']:checked").val();
+                    valor=$("#valor").val();    
+                    msisdn=valor;
+                     $('#message').show();                 
+                    
+                   
                     tableConsumo.ajax.reload();
-                    tableUser.ajax.reload();
                     tableDispositivos.ajax.reload();
                     tableAlquiler.ajax.reload();
+                    tableUser.ajax.reload();
+                    barProgress(20); 
+               
+           
+                 
             });
             
+        $("#form_serviceUpdateEmail").submit(function(event){
+                event.preventDefault(); //prevent default action 
+                
+                var type = "1";
+                var auditory="Update Usuario Claro Video";               
+                var name = $("#inputNombre").val();
+                var lastName = $("#inputApellido").val();                
+                var email = $("#inputEmail").val();
+       
+                $.post(
+                        "../GetUpdateUser",
+                        {   
+                            msisdn: msisdn,
+                            type: type,
+                            name: name,
+                            lastName: lastName,
+                            email: email,  
+                            auditory: auditory
+                        },
+                function (json) {
+                alert(json.message); 
+                updateUserTable();
+                });
+
+        });
+    
+        
+         $("#form_serviceUpdateName").submit(function(event){
+                event.preventDefault(); //prevent default action 
+                
+                var type = "2";
+                var auditory="Update Name Claro Video";               
+                var name = $("#inputNombre").val();
+                var lastName = $("#inputApellido").val();                
+                var email = $("#inputEmail").val();
+       
+       
+                $.post(
+                        "../GetUpdateUser",
+                        {   
+                            msisdn: msisdn,
+                            type: type,
+                            name: name,
+                            lastName: lastName,
+                            email: email,  
+                            auditory: auditory
+                        },
+                function (json) { 
+                  alert(json.message); 
+                updateUserTable();
+
+                });
+
+        });
+        
+         $("#form_serviceUpdatePassword").submit(function(event){
+                event.preventDefault(); //prevent default action 
+                
+                var type = "3";
+                var auditory="Update Password Claro Video";               
+                var name = $("#inputNombre").val();
+                var lastName = $("#inputApellido").val();                
+                var email = $("#inputEmail").val();
+                var password = $("#inputPassword").val(); 
+       
+                $.post(
+                        "../GetUpdateUser",
+                        {   
+                            msisdn: msisdn,
+                            type: type,
+                            name: name,
+                            lastName: lastName,
+                            email: email,  
+                            password: password,
+                            auditory: auditory
+                        },
+                function (json) {  
+                alert(json.message);              
+                });
+
+        });
+                    
+        $("#btnClear").click(function(){
+            clearBar();
+        });
+        
+        function clearBar(){
+            $("#valor").val(""); 
+            tableConsumo.clear().draw();
+            tableUser.clear().draw();
+            tableDispositivos.clear().draw();
+            tableAlquiler.clear().draw(); 
+            progress=0;  
+            barProgress(0);
+            $('#message').hide();
+            
+        }
+        
+        function updateUserTable(){
+              progress=0;  
+              barProgress(0);
+              tableUser.clear().draw();
+              tableUser.ajax.reload();
+              barProgress(80); 
+                
+            
+        }
+        
+        
+        $('#TABLEUSERCV tbody').on('click', '#updateCuenta', function () {
+
+        var data = tableUser.row($(this).parents('tr')).data();
+        var email = data[0];
+        var nombre = data[1];
+        var apellido = data[2];
+     
+        var option = confirm("¿Desea Modificar el registro?");
+        if (option == true) {
+                    $("#myModalEdit").modal({backdrop: 'static', keyboard: false});
+                     $("#inputEmail").val(email);
+                     $("#inputNombre").val(nombre);
+                     $("#inputApellido").val(apellido);
+                     
+                     
+            } else {
+            alert("Cancelado");
+        }
+        
+        
+         });
+         
+              
+        $('#TABLEUSERCV tbody').on('click', '#deleteCuenta', function () {
+
+        var data = tableUser.row($(this).parents('tr')).data();
+        var email = data[0];
+        var nombre = data[1];
+        var apellido = data[2];
+     
+        var option = confirm("¿Desea dar de baja al usuario?");
+        if (option == true) {
+            
+              $.post(
+                        "../GetDeleteBundle",
+                        {   
+                            msisdn: msisdn
+                        },
+                function (json) {  
+                alert(json.message);              
+                });
+
+                     
+                     
+            } else {
+            alert("Cancelado");
+        }
+        
+        
+         });
+        
+        
+        
+        
+        
+
 
         
+
+    
+         progress=0;  
+        barProgress(0);
+
+
+    });
+            
+
+   
         
         
     
                     
-            
-         });
+       
+
+
          
          
          

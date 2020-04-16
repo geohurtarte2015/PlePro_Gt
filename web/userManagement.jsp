@@ -61,6 +61,7 @@
         String rol = (String) session.getAttribute("rol");
             
             String displaySegmentacion = "display:block";
+            String displayClaroVideo = "display:block";
             String display1 = "display:block";
             String display2 = "display:block";
             String display3 = "display:block";
@@ -74,6 +75,7 @@
                 case 2:
                     response.sendRedirect("principal.jsp");
                     displaySegmentacion = "display:none";
+                     displayClaroVideo = "display:none";
                     display2 = "display:none";
                     display3 = "display:none";
                     display4 = "display:none";
@@ -82,16 +84,19 @@
                     break;
                 case 3:
                     response.sendRedirect("principal.jsp");
+                     displayClaroVideo = "display:none";
                     display1 = "display:none";          
                     display5 = "display:none";
                     display6 = "display:none";
                     break;
                 case 4:
-                    response.sendRedirect("principal.jsp");               
+                    response.sendRedirect("principal.jsp"); 
+                     displayClaroVideo = "display:none";
                     display5 = "display:none";     
                     break;
                 case 5:
                     displaySegmentacion = "display:none";
+                     displayClaroVideo = "display:none";
                     display1 = "display:none";
                     display2 = "display:none";
                     display3 = "display:none";
@@ -99,8 +104,9 @@
                     display6 = "display:none";
                     break; 
                 case 6:
-                        response.sendRedirect("principal.jsp");
+                    response.sendRedirect("principal.jsp");
                     displaySegmentacion = "display:none";
+                     displayClaroVideo = "display:none";
                     display1 = "display:none";
                     display2 = "display:none";
                     display3 = "display:none";
@@ -109,11 +115,21 @@
                     break; 
                  case 7:          
                      displaySegmentacion = "display:none";
+                      displayClaroVideo = "display:none";
                         display2 = "display:none";
                         display3 = "display:none";
                         display4 = "display:none";
                         display5 = "display:none";
                         response.sendRedirect("principal.jsp");
+                        break;
+                case 8:
+                        displaySegmentacion = "display:none";
+                        display1 = "display:none";
+                        display2 = "display:none";
+                        display3 = "display:none";
+                        display4 = "display:none";
+                        display5 = "display:none";
+                        display6 = "display:none";
                         break;
             }
             
@@ -185,6 +201,14 @@
                           <li><a href="userManagement.jsp">Usuarios y Perfiles</a></li>                     
                       </ul>
                   </li>
+                    <li style="<%=displayClaroVideo%>"><a><i class="fa fa-play-circle"></i>Gestión Claro Video <span class="fa fa-chevron-down"></span></a>
+                      <ul class="nav child_menu">
+                          <li><a href="ClaroVideo/altasUsuarioHubClaro.jsp">Alta de usuario</a></li> 
+                          <li><a href="ClaroVideo/consultaConsumosHubClaro.jsp">Consulta consumos</a></li> 
+                          <li><a href="ClaroVideo/cambioCuenta.jsp">Cuentas</a></li> 
+                          <li><a href="ClaroVideo/consultaReportes.jsp">Reportes</a></li>                
+                      </ul>
+                    </li>
                 </ul>
               </div>
             </div>    

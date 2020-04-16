@@ -136,6 +136,18 @@
         <servlet-name>GetListRentHubClaro</servlet-name>
         <servlet-class>view.crud.GetListRentHubClaro</servlet-class>
     </servlet>
+    <servlet>
+        <servlet-name>GetUpdateUser</servlet-name>
+        <servlet-class>view.crud.GetUpdateUser</servlet-class>
+    </servlet>
+    <servlet>
+        <servlet-name>TableListPos</servlet-name>
+        <servlet-class>view.crud.TableListPos</servlet-class>
+    </servlet>
+    <servlet>
+        <servlet-name>GetDeleteBundle</servlet-name>
+        <servlet-class>view.crud.GetDeleteBundle</servlet-class>
+    </servlet>
     <servlet-mapping>
         <servlet-name>EndSesion</servlet-name>
         <url-pattern>/EndSesion</url-pattern>
@@ -275,6 +287,18 @@
     <servlet-mapping>
         <servlet-name>GetListRentHubClaro</servlet-name>
         <url-pattern>/GetListRentHubClaro</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>GetUpdateUser</servlet-name>
+        <url-pattern>/GetUpdateUser</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>TableListPos</servlet-name>
+        <url-pattern>/TableListPos</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>GetDeleteBundle</servlet-name>
+        <url-pattern>/GetDeleteBundle</url-pattern>
     </servlet-mapping>
     <session-config>
         <session-timeout>

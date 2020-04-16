@@ -2,7 +2,7 @@
 package com.pojo;
 
 
-public class SprLine extends Spr{
+public class SprLineVirtual extends Spr{
 
    
  
@@ -14,10 +14,11 @@ public class SprLine extends Spr{
     private String address1;
     private String address2;
     private String address3;
-    private String statusAccount; 
+    private String statusAccount;
+    private String msisdn;
     private String svtdes;
 
-    public SprLine(){
+    public SprLineVirtual(){
     
         this.virtual="";
         
@@ -55,7 +56,14 @@ public class SprLine extends Spr{
     }
 
   
+    public String getMsisdn() {
+        return msisdn;
+    }
 
+ 
+    public void setMsisdn(String msisdn) {
+        this.msisdn = msisdn;
+    }
 
    
     public String getSvtdes() {

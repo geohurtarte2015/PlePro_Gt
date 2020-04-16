@@ -73,7 +73,7 @@ public class GetListRentHubClaro extends HttpServlet {
         ResultQueryUserResponse responseQueryUserResponse = new ResultQueryUserResponse();
 
         
-        responseQueryUserResponse = requestJson.queryOttDevice("http://172.16.204.189:30100/hubOTT/internal/rest/QueryOtt", "GT", email, msisdn,"consultarrentascliente",dateInit,dateFinish);
+        responseQueryUserResponse = requestJson.queryOttRent("http://172.16.204.189:30100/hubOTT/internal/rest/QueryOtt", "GT", email, msisdn,"consultarrentascliente",dateInit,dateFinish);
         
         String description = responseQueryUserResponse.getResponse().getDescription();
         int code = responseQueryUserResponse.getResponse().getCode();

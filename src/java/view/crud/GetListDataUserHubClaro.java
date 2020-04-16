@@ -10,7 +10,12 @@ import com.webservice.RequestJson;
 import controller.GetJson;
 import java.io.IOException;
 import java.io.PrintWriter;
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.Date;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
@@ -53,13 +58,34 @@ public class GetListDataUserHubClaro extends HttpServlet {
         String msisdn="";
         String email="";
         String json ="";
+        String dateInitP="";
+        String dateFinishP="";
         String dateInit="";
-        String dateFinish="";
+        String dateFinish="";        
         
-        dateInit = "2020-01-01T00:00:00Z";    
-        dateFinish = "2020-01-28T23:59:59Z";
+      
+        
+       
+        dateInitP = String.valueOf(request.getParameter("dateinit"));
+        dateFinishP = String.valueOf(request.getParameter("datefinish"));
         String valor = String.valueOf(request.getParameter("valor"));
         String option = String.valueOf(request.getParameter("option"));
+        
+        
+        SimpleDateFormat format = new SimpleDateFormat("dd-MM-yyyy hh:mm:ss a");
+        Date dateInitFormat;
+        try {
+            dateInitFormat = format.parse(dateInitP);
+            Date dateFinishFormat = format.parse(dateFinishP);
+            format = new SimpleDateFormat("yyyy-MM-dd'T'hh:mm:ssZ");
+            dateInit = format.format(dateInitFormat);
+            dateFinish = format.format(dateFinishFormat);
+        } catch (ParseException ex) {
+            Logger.getLogger(GetListSubscriberUserHubClaro.class.getName()).log(Level.SEVERE, null, ex);
+        }
+
+        
+       
         
         
                 

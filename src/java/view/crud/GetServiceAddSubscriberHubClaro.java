@@ -8,6 +8,11 @@ package view.crud;
 import clientWebservice.AddPackResponse;
 import clientWebservice.AddSubscriberHubClaro;
 import clientWebservice.TbHUBSUBSCRIBER;
+import com.pojo.SprLine;
+import com.pojo.SprLineVirtual;
+import com.pojo.SprMobile;
+import com.pojo.UserClaroVideo;
+import com.webservice.RequestJson;
 //import clientWebservice.RepuestaInvokeParams;
 import java.io.IOException;
 import java.io.PrintWriter;
@@ -54,18 +59,108 @@ public class GetServiceAddSubscriberHubClaro extends HttpServlet {
         String email = String.valueOf(request.getParameter("email"));
         String name = String.valueOf(request.getParameter("name"));
         String lastName = String.valueOf(request.getParameter("lastName"));
+        String lastMotherName = String.valueOf(request.getParameter("lastMotherName"));
         String channel = String.valueOf(request.getParameter("OptionChannel"));
         String codeArea = "502";
         String productId = String.valueOf(request.getParameter("OptionProduct"));
-        
+        String typeBusiness = String.valueOf(request.getParameter("OptionBusiness"));
+        String employeeId = "CVUSER2020";
+        String responseMessage="";
+        String messageResponse="Error en alta de Usuario";
         String token="";
-  
+        String msisdn = codeArea+phone;
+        SprLine sprLine = new SprLine();
+
+        SprMobile sprMobile = new SprMobile();
+        RequestJson requestJson = new RequestJson();
         
-        
-        
-          AddSubscriberHubClaro addSubscriberHubClaro = new AddSubscriberHubClaro();
-          dataUser = addSubscriberHubClaro.listAccountSuscriber("", "", phone);
+       
           
+
+            UserClaroVideo user = new UserClaroVideo();
+
+    
+            if (Integer.parseInt(typeBusiness) == 2) {
+                sprLine = requestJson.lineSprResponse("http://172.16.204.215:10001/spr/rest/resource/v1/cache/profile/pisa-" + phone + "/default/default/show",msisdn);
+                
+       
+                user.setMsisdn(sprLine.getMsisdn());                
+                user.setCodeResponse(sprLine.getCodeResult());
+                user.setDescriptionResponse(sprLine.getDescriptionResult());
+                user.setVirtual(sprLine.getVirtual());
+                user.setPaymentMethod(sprLine.getPaymentMethodInd());
+             
+            } else {
+                sprMobile = requestJson.mobileSprResponse("http://172.16.204.215:10001/spr/rest/resource/v1/cache/profile/" + msisdn + "/mc/default/show",msisdn);
+               
+                user.setCodeResponse(sprMobile.getCodeResult());
+                user.setDescriptionResponse(sprMobile.getDescriptionResult());
+                user.setPaymentMethod(sprMobile.getPaymentMethodInd());
+                user.setMsisdn(sprMobile.getMsisdn());
+                user.setVirtual("");
+            }
+
+            if (Integer.parseInt(user.getCodeResponse()) != 0) {
+                responseMessage = "Error en consulta del perfil del numero del usuario";
+            }
+
+            if (Integer.parseInt(user.getCodeResponse()) == 0) {
+                
+                
+                AddSubscriberHubClaro addSubscriberHubClaro = new AddSubscriberHubClaro();
+                dataUser = addSubscriberHubClaro.listAccountSuscriber("", "", user.getMsisdn());
+                
+                String state="-1";                
+                if(dataUser.getMSISDN()!=null){
+                     state = dataUser.getState();
+                }               
+                
+                state="2";
+                
+                if(Integer.parseInt(state)==-1 || (Integer.parseInt(state)!=1 && Integer.parseInt(state)!=6)){
+                
+                        user.setChannel(channel);
+                        user.setName(name);
+                        user.setLastName(lastName);
+                        user.setLastMother(lastMotherName);         
+                        user.setEmail(email);
+                        user.setEmployeeId(employeeId);               
+                        user.setTmcode("");
+                        user.setCustomerId("");
+                        user.setCodId("");      
+
+                       messageResponse = requestJson.AddUser("http://172.16.68.235:8312/hubOTT/internal/rest/createUserOTT", user);
+
+                }else{
+                    int val =Integer.parseInt(state);
+                    
+                    switch  (val){
+                    
+                        case 1:
+                            messageResponse ="Usuario claro video ya estaba en alta";
+                            break;   
+                        case 6:
+                              messageResponse ="Usuario claro video existente pero con error en bundle";
+                            break;
+                    
+                    }
+                    
+                    
+                
+                }
+                
+                
+               
+                
+                
+                
+                
+        
+                responseMessage = messageResponse;
+            }
+
+       
+
           
                   
 //        clientWebservice.GuiParameter parameters = new clientWebservice.GuiParameter();
@@ -87,7 +182,7 @@ public class GetServiceAddSubscriberHubClaro extends HttpServlet {
         
         JSONObject json = new JSONObject();
         json.put("code", 0);
-        json.put("message", "Mensaje respuesta");
+        json.put("message", responseMessage);
         json.put("type", 0);
         response.setContentType("application/json");
         response.getWriter().write(json.toString());

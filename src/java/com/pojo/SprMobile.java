@@ -13,6 +13,13 @@ public class SprMobile extends Spr {
     
     private String isMigrated;
     private String imsi;
+    
+    
+    public SprMobile(){
+    
+     
+    
+    }
 
   
     public String getIsMigrated() {

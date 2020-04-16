@@ -10,13 +10,19 @@ package com.pojo;
  * @author LENOVO
  */
 public class Spr {
+
+ 
     
     private String paymentMethodInd;
     private String iso3166;
     private String codeResult;
     private String descriptionResult;
+    private String msisdn;
 
 
+    public Spr(){
+        this.paymentMethodInd="";
+    }
  
     public String getCodeResult() {
         return codeResult;
@@ -57,6 +63,15 @@ public class Spr {
         this.iso3166 = iso3166;
     }
 
+
+    public String getMsisdn() {
+        return msisdn;
+    }
+
+
+    public void setMsisdn(String msisdn) {
+        this.msisdn = msisdn;
+    }
   
   
     
