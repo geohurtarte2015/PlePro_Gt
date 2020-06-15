@@ -27,6 +27,8 @@ public class User
     processRequest(request, response);
   }
   
+  
+  
 
   protected void doPost(HttpServletRequest request, HttpServletResponse response)
     throws ServletException, IOException
@@ -52,6 +54,8 @@ public class User
       String url= list.get(0)[2];
       String port= list.get(0)[3];
       
+
+      
       LdapConnection ldap = new LdapConnection();
       valUsuario = ldap.searchLdap(usuario, password, url, port, domainldap);
       
@@ -68,11 +72,14 @@ public class User
                     nombreSesion = listUser.get(0)[1];
                     apellidoSesion = listUser.get(0)[2];
                     rolSesion = listUser.get(0)[4];
-
+                    
+                   
+                    
                     HttpSession httpSession = request.getSession(true);
                     httpSession.setAttribute("nombre", nombreSesion);
                     httpSession.setAttribute("apellido", apellidoSesion);
                     httpSession.setAttribute("rol", rolSesion);
+                    
                 } else {
                     String error = "errorusuario";
                     out.println(error.trim());

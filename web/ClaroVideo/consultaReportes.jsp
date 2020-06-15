@@ -213,9 +213,7 @@
                    <li style="<%=displayClaroVideo%>"> <a><i class="fa fa-play-circle"></i>Gestión Claro Video <span class="fa fa-chevron-down"></span></a>
                       <ul class="nav child_menu">
                           <li><a href="altasUsuarioHubClaro.jsp">Alta de usuario</a></li> 
-                          <li><a href="consultaConsumosHubClaro.jsp">Consulta consumos</a></li> 
-                          <li><a href="cambioCuenta.jsp">Cuentas</a></li> 
-                          <li><a href="consultaReportes.jsp">Reportes</a></li>                
+                          <li><a href="consultaConsumosHubClaro.jsp">Consulta consumos</a></li>                                      
                       </ul>
                     </li>
                 </ul>

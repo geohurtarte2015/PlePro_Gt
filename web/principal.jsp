@@ -190,7 +190,7 @@
                           <li style="<%=display3%>"><a href="creacion.jsp">Carga de clientes POS</a></li> 
                           <li style="<%=display4%>"><a href="eliminar.jsp">Eliminar clientes POS</a></li>  
                           <li style="<%=display7%>"><a href="mantenimiento.jsp">Mantenimiento clientes POS</a></li> 
-                       
+                          <li><a href="eliminacion901.jsp">Clientes 901</a></li>
                          
                       </ul>
                   </li>
@@ -202,9 +202,7 @@
                    <li style="<%=displayClaroVideo%>"><a><i class="fa fa-play-circle"></i>Gestión Claro Video <span class="fa fa-chevron-down"></span></a>
                       <ul class="nav child_menu">
                           <li><a href="ClaroVideo/altasUsuarioHubClaro.jsp">Alta de usuario</a></li> 
-                          <li><a href="ClaroVideo/consultaConsumosHubClaro.jsp">Consulta consumos</a></li> 
-                          <li><a href="ClaroVideo/cambioCuenta.jsp">Cuentas</a></li> 
-                          <li><a href="ClaroVideo/consultaReportes.jsp">Reportes</a></li>                
+                          <li><a href="ClaroVideo/consultaConsumosHubClaro.jsp">Consulta consumos</a></li>                    
                       </ul>
                     </li>
                 </ul>

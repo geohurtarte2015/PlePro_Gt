@@ -8,6 +8,7 @@ import java.io.OutputStream;
 import java.io.UnsupportedEncodingException;
 import java.net.HttpURLConnection;
 import java.net.MalformedURLException;
+import java.net.SocketTimeoutException;
 import java.net.URL;
 import java.util.logging.Level;
 import java.util.logging.Logger;
@@ -55,52 +56,56 @@ public class GetWebservice {
             return responseHttp;
 	}
     
-    public  String doPostJson(String urlHttp, String jsonInputString){    
-                StringBuilder responseHttp=null;
-		try{    
-            
-                    String output="";
-                    
-                    
-                    URL url = new URL(urlHttp);
-                    HttpURLConnection conn = (HttpURLConnection) url.openConnection();
-                    conn.setRequestMethod("POST");
-                    conn.setRequestProperty("Content-Type", "application/json");
-                    conn.setRequestProperty("Accept", "application/json");
-                    conn.setDoOutput(true);
-
-                    
-                    
-                    try(OutputStream os = conn.getOutputStream()){
-                        byte[] input = jsonInputString.getBytes("utf-8");
-                        os.write(input, 0, input.length);
-                    }
-                    
-                    int code = conn.getResponseCode();
-                    String response = conn.getResponseMessage();
-                    String message = conn.getHeaderField(7);
-                    
-                    if(code!=200){
-                    System.out.println(code);
-                    return "0";
-                    
-                    }
-          
-                    
-                    try(BufferedReader br = new BufferedReader(new InputStreamReader(conn.getInputStream(), "utf-8"))){
-                        responseHttp = new StringBuilder();
-                        String responseLine = null;
-                        while ((responseLine = br.readLine()) != null) {
-                            responseHttp.append(responseLine.trim());
+    public  String doPostJson(String urlHttp, String jsonInputString){   
+                     StringBuilder responseHttp=null;
+                     String output="";
+                    try{    
+                        
+                        URL url = new URL(urlHttp);
+                        HttpURLConnection.setFollowRedirects(false);
+                        HttpURLConnection conn = (HttpURLConnection) url.openConnection();
+                        conn.setRequestMethod("POST");
+                        conn.setConnectTimeout(30000);
+                        conn.setRequestProperty("Content-Type", "application/json");
+                        conn.setRequestProperty("Accept", "application/json");
+                        conn.setDoOutput(true);
+                        
+                        
+                        
+                        try(OutputStream os = conn.getOutputStream()){
+                            byte[] input = jsonInputString.getBytes("utf-8");
+                            os.write(input, 0, input.length);
                         }
-                        System.out.println(responseHttp.toString());
-                    }
-                } catch (MalformedURLException ex) {
-            Logger.getLogger(GetWebservice.class.getName()).log(Level.SEVERE, null, ex);
-        } catch (IOException ex) {
-            Logger.getLogger(GetWebservice.class.getName()).log(Level.SEVERE, null, ex);
-        }
-                return responseHttp.toString();
+                        
+                        int code = conn.getResponseCode();
+                        String response = conn.getResponseMessage();
+                        String message = conn.getHeaderField(7);
+                        
+                        if(code!=200){
+                            System.out.println(code);
+                            return "0";
+                            
+                        }
+                        
+                        
+                        try(BufferedReader br = new BufferedReader(new InputStreamReader(conn.getInputStream(), "utf-8"))){
+                            responseHttp = new StringBuilder();
+                            String responseLine = null;
+                            while ((responseLine = br.readLine()) != null) {
+                                responseHttp.append(responseLine.trim());
+                            }
+                            System.out.println(responseHttp.toString());
+                        }                     
+                    
+                    } catch (SocketTimeoutException ex) {                  
+                        Logger.getLogger(GetWebservice.class.getName()).log(Level.SEVERE, null, ex);
+                        System.out.println("Error timeout ...");
+                        return "-1";
+                    } catch (IOException  ex) {
+                        Logger.getLogger(GetWebservice.class.getName()).log(Level.SEVERE, null, ex);
+                        return "0";
+                    } 
+               return responseHttp.toString();
 	}
     
     public String  doGetJson(String urlHttp){

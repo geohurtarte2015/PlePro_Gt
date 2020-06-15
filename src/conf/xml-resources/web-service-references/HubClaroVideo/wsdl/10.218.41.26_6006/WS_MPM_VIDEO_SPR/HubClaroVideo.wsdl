@@ -7,29 +7,17 @@
 <xsd:import namespace="ACT" schemaLocation="http://10.218.41.26:6006/WS_MPM_VIDEO_SPR/HubClaroVideo?xsd=2"/>
 </xsd:schema>
 </types>
+<message name="updateFijaCustomer">
+<part name="parameters" element="tns:updateFijaCustomer"/>
+</message>
+<message name="updateFijaCustomerResponse">
+<part name="parameters" element="tns:updateFijaCustomerResponse"/>
+</message>
 <message name="AccountSuscriberNew">
 <part name="parameters" element="tns:AccountSuscriberNew"/>
 </message>
 <message name="AccountSuscriberNewResponse">
 <part name="parameters" element="tns:AccountSuscriberNewResponse"/>
-</message>
-<message name="AccountStateUpdate">
-<part name="parameters" element="tns:AccountStateUpdate"/>
-</message>
-<message name="AccountStateUpdateResponse">
-<part name="parameters" element="tns:AccountStateUpdateResponse"/>
-</message>
-<message name="emailUpdate">
-<part name="parameters" element="tns:emailUpdate"/>
-</message>
-<message name="emailUpdateResponse">
-<part name="parameters" element="tns:emailUpdateResponse"/>
-</message>
-<message name="AccountBundleStateUpdate">
-<part name="parameters" element="tns:AccountBundleStateUpdate"/>
-</message>
-<message name="AccountBundleStateUpdateResponse">
-<part name="parameters" element="tns:AccountBundleStateUpdateResponse"/>
 </message>
 <message name="AccountSuscriberDown">
 <part name="parameters" element="tns:AccountSuscriberDown"/>
@@ -49,28 +37,44 @@
 <message name="ServiceActiveResponse">
 <part name="parameters" element="tns:ServiceActiveResponse"/>
 </message>
+<message name="emailUpdate">
+<part name="parameters" element="tns:emailUpdate"/>
+</message>
+<message name="emailUpdateResponse">
+<part name="parameters" element="tns:emailUpdateResponse"/>
+</message>
+<message name="AccountBundleStateUpdate">
+<part name="parameters" element="tns:AccountBundleStateUpdate"/>
+</message>
+<message name="AccountBundleStateUpdateResponse">
+<part name="parameters" element="tns:AccountBundleStateUpdateResponse"/>
+</message>
+<message name="AccountStateUpdate">
+<part name="parameters" element="tns:AccountStateUpdate"/>
+</message>
+<message name="AccountStateUpdateResponse">
+<part name="parameters" element="tns:AccountStateUpdateResponse"/>
+</message>
 <message name="ListAccountSuscriber">
 <part name="parameters" element="tns:ListAccountSuscriber"/>
 </message>
 <message name="ListAccountSuscriberResponse">
 <part name="parameters" element="tns:ListAccountSuscriberResponse"/>
 </message>
+<message name="eligibilityAccount">
+<part name="parameters" element="tns:eligibilityAccount"/>
+</message>
+<message name="eligibilityAccountResponse">
+<part name="parameters" element="tns:eligibilityAccountResponse"/>
+</message>
 <portType name="SprCore">
+<operation name="updateFijaCustomer">
+<input wsam:Action="http://ws.com.claro/SprCore/updateFijaCustomerRequest" message="tns:updateFijaCustomer"/>
+<output wsam:Action="http://ws.com.claro/SprCore/updateFijaCustomerResponse" message="tns:updateFijaCustomerResponse"/>
+</operation>
 <operation name="AccountSuscriberNew">
 <input wsam:Action="http://ws.com.claro/SprCore/AccountSuscriberNewRequest" message="tns:AccountSuscriberNew"/>
 <output wsam:Action="http://ws.com.claro/SprCore/AccountSuscriberNewResponse" message="tns:AccountSuscriberNewResponse"/>
-</operation>
-<operation name="AccountStateUpdate">
-<input wsam:Action="http://ws.com.claro/SprCore/AccountStateUpdateRequest" message="tns:AccountStateUpdate"/>
-<output wsam:Action="http://ws.com.claro/SprCore/AccountStateUpdateResponse" message="tns:AccountStateUpdateResponse"/>
-</operation>
-<operation name="emailUpdate">
-<input wsam:Action="http://ws.com.claro/SprCore/emailUpdateRequest" message="tns:emailUpdate"/>
-<output wsam:Action="http://ws.com.claro/SprCore/emailUpdateResponse" message="tns:emailUpdateResponse"/>
-</operation>
-<operation name="AccountBundleStateUpdate">
-<input wsam:Action="http://ws.com.claro/SprCore/AccountBundleStateUpdateRequest" message="tns:AccountBundleStateUpdate"/>
-<output wsam:Action="http://ws.com.claro/SprCore/AccountBundleStateUpdateResponse" message="tns:AccountBundleStateUpdateResponse"/>
 </operation>
 <operation name="AccountSuscriberDown">
 <input wsam:Action="http://ws.com.claro/SprCore/AccountSuscriberDownRequest" message="tns:AccountSuscriberDown"/>
@@ -84,41 +88,39 @@
 <input wsam:Action="http://ws.com.claro/SprCore/ServiceActiveRequest" message="tns:ServiceActive"/>
 <output wsam:Action="http://ws.com.claro/SprCore/ServiceActiveResponse" message="tns:ServiceActiveResponse"/>
 </operation>
+<operation name="emailUpdate">
+<input wsam:Action="http://ws.com.claro/SprCore/emailUpdateRequest" message="tns:emailUpdate"/>
+<output wsam:Action="http://ws.com.claro/SprCore/emailUpdateResponse" message="tns:emailUpdateResponse"/>
+</operation>
+<operation name="AccountBundleStateUpdate">
+<input wsam:Action="http://ws.com.claro/SprCore/AccountBundleStateUpdateRequest" message="tns:AccountBundleStateUpdate"/>
+<output wsam:Action="http://ws.com.claro/SprCore/AccountBundleStateUpdateResponse" message="tns:AccountBundleStateUpdateResponse"/>
+</operation>
+<operation name="AccountStateUpdate">
+<input wsam:Action="http://ws.com.claro/SprCore/AccountStateUpdateRequest" message="tns:AccountStateUpdate"/>
+<output wsam:Action="http://ws.com.claro/SprCore/AccountStateUpdateResponse" message="tns:AccountStateUpdateResponse"/>
+</operation>
 <operation name="ListAccountSuscriber">
 <input wsam:Action="http://ws.com.claro/SprCore/ListAccountSuscriberRequest" message="tns:ListAccountSuscriber"/>
 <output wsam:Action="http://ws.com.claro/SprCore/ListAccountSuscriberResponse" message="tns:ListAccountSuscriberResponse"/>
 </operation>
+<operation name="eligibilityAccount">
+<input wsam:Action="http://ws.com.claro/SprCore/eligibilityAccountRequest" message="tns:eligibilityAccount"/>
+<output wsam:Action="http://ws.com.claro/SprCore/eligibilityAccountResponse" message="tns:eligibilityAccountResponse"/>
+</operation>
 </portType>
 <binding name="SprCorePortBinding" type="tns:SprCore">
 <soap:binding transport="http://schemas.xmlsoap.org/soap/http" style="document"/>
+<operation name="updateFijaCustomer">
+<soap:operation soapAction=""/>
+<input>
+<soap:body use="literal"/>
+</input>
+<output>
+<soap:body use="literal"/>
+</output>
+</operation>
 <operation name="AccountSuscriberNew">
-<soap:operation soapAction=""/>
-<input>
-<soap:body use="literal"/>
-</input>
-<output>
-<soap:body use="literal"/>
-</output>
-</operation>
-<operation name="AccountStateUpdate">
-<soap:operation soapAction=""/>
-<input>
-<soap:body use="literal"/>
-</input>
-<output>
-<soap:body use="literal"/>
-</output>
-</operation>
-<operation name="emailUpdate">
-<soap:operation soapAction=""/>
-<input>
-<soap:body use="literal"/>
-</input>
-<output>
-<soap:body use="literal"/>
-</output>
-</operation>
-<operation name="AccountBundleStateUpdate">
 <soap:operation soapAction=""/>
 <input>
 <soap:body use="literal"/>
@@ -154,7 +156,43 @@
 <soap:body use="literal"/>
 </output>
 </operation>
+<operation name="emailUpdate">
+<soap:operation soapAction=""/>
+<input>
+<soap:body use="literal"/>
+</input>
+<output>
+<soap:body use="literal"/>
+</output>
+</operation>
+<operation name="AccountBundleStateUpdate">
+<soap:operation soapAction=""/>
+<input>
+<soap:body use="literal"/>
+</input>
+<output>
+<soap:body use="literal"/>
+</output>
+</operation>
+<operation name="AccountStateUpdate">
+<soap:operation soapAction=""/>
+<input>
+<soap:body use="literal"/>
+</input>
+<output>
+<soap:body use="literal"/>
+</output>
+</operation>
 <operation name="ListAccountSuscriber">
+<soap:operation soapAction=""/>
+<input>
+<soap:body use="literal"/>
+</input>
+<output>
+<soap:body use="literal"/>
+</output>
+</operation>
+<operation name="eligibilityAccount">
 <soap:operation soapAction=""/>
 <input>
 <soap:body use="literal"/>

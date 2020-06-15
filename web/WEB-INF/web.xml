@@ -145,8 +145,40 @@
         <servlet-class>view.crud.TableListPos</servlet-class>
     </servlet>
     <servlet>
-        <servlet-name>GetDeleteBundle</servlet-name>
-        <servlet-class>view.crud.GetDeleteBundle</servlet-class>
+        <servlet-name>GetListSuscriptionsAddons</servlet-name>
+        <servlet-class>view.crud.GetListSuscriptionsAddons</servlet-class>
+    </servlet>
+    <servlet>
+        <servlet-name>GetEligibilityAccount</servlet-name>
+        <servlet-class>view.crud.GetEligibilityAccount</servlet-class>
+    </servlet>
+    <servlet>
+        <servlet-name>GetServiceCancelUserHubClaro</servlet-name>
+        <servlet-class>view.crud.GetServiceCancelUserHubClaro</servlet-class>
+    </servlet>
+    <servlet>
+        <servlet-name>GetCancelSuscriptionsAddons</servlet-name>
+        <servlet-class>view.crud.GetCancelSuscriptionsAddons</servlet-class>
+    </servlet>
+    <servlet>
+        <servlet-name>GetCancelDevice</servlet-name>
+        <servlet-class>view.crud.GetCancelDevice</servlet-class>
+    </servlet>
+    <servlet>
+        <servlet-name>GetListPaymentHubClaro</servlet-name>
+        <servlet-class>view.crud.GetListPaymentHubClaro</servlet-class>
+    </servlet>
+    <servlet>
+        <servlet-name>GetCancelPayment</servlet-name>
+        <servlet-class>view.crud.GetCancelPayment</servlet-class>
+    </servlet>
+    <servlet>
+        <servlet-name>TableListAddons</servlet-name>
+        <servlet-class>view.crud.TableListAddons</servlet-class>
+    </servlet>
+    <servlet>
+        <servlet-name>GetMsisdnHubClaro</servlet-name>
+        <servlet-class>view.crud.GetMsisdnHubClaro</servlet-class>
     </servlet>
     <servlet-mapping>
         <servlet-name>EndSesion</servlet-name>
@@ -297,8 +329,40 @@
         <url-pattern>/TableListPos</url-pattern>
     </servlet-mapping>
     <servlet-mapping>
-        <servlet-name>GetDeleteBundle</servlet-name>
-        <url-pattern>/GetDeleteBundle</url-pattern>
+        <servlet-name>GetListSuscriptionsAddons</servlet-name>
+        <url-pattern>/GetListSuscriptionsAddons</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>GetEligibilityAccount</servlet-name>
+        <url-pattern>/GetEligibilityAccount</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>GetServiceCancelUserHubClaro</servlet-name>
+        <url-pattern>/GetServiceCancelUserHubClaro</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>GetCancelSuscriptionsAddons</servlet-name>
+        <url-pattern>/GetCancelSuscriptionsAddons</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>GetCancelDevice</servlet-name>
+        <url-pattern>/GetCancelDevice</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>GetListPaymentHubClaro</servlet-name>
+        <url-pattern>/GetListPaymentHubClaro</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>GetCancelPayment</servlet-name>
+        <url-pattern>/GetCancelPayment</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>TableListAddons</servlet-name>
+        <url-pattern>/TableListAddons</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>GetMsisdnHubClaro</servlet-name>
+        <url-pattern>/GetMsisdnHubClaro</url-pattern>
     </servlet-mapping>
     <session-config>
         <session-timeout>

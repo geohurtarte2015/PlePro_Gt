@@ -1,10 +1,8 @@
 
 package view.crud;
 
-
-import clientWebservice.AddPackResponse;
-import clientWebservice.PackageCore_Service;
-import com.webservice.GetWebservice;
+import com.pojo.UserClaroVideo;
+import com.webservice.RequestJson;
 import configuration.Configuration;
 import java.io.IOException;
 import java.io.PrintWriter;
@@ -12,26 +10,19 @@ import javax.servlet.ServletException;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
-import javax.xml.ws.WebServiceRef;
 import org.json.JSONObject;
-import pojo.CodeErrorWebservice;
 
-/**
- *
- * @author LENOVO
- */
-public class GetServiceAddPack extends HttpServlet {
+
+public class GetServiceCancelUserHubClaro extends HttpServlet {
     
       private Configuration configuration = null;
     
-      public GetServiceAddPack()  {       
+      public GetServiceCancelUserHubClaro()  {       
 
         configuration = new Configuration();
          
       }
 
-    @WebServiceRef(wsdlLocation = "WEB-INF/wsdl/172.16.168.143_7006/WS_PLE_BRIDGE_SV/PackageCore.wsdl")
-    private PackageCore_Service service;
 
 
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
@@ -50,40 +41,47 @@ public class GetServiceAddPack extends HttpServlet {
     @Override
     protected void doPost(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
+        processRequest(request, response);
         
-        String country = configuration.getPrefixCountry();
+        String country = configuration.getPrefixCountry();        
+        String urlAmcoUser = configuration.getUrlAmcoUserClaroVideo();        
+        String responseMessage = "Error al cancelar ususario";
+   
+               
+        String paymentMethod = String.valueOf(request.getParameter("paymentMethod"));
+        String msisdn = String.valueOf(request.getParameter("msisdn")).trim();
+        //String country="502";
+        
+        RequestJson requestJson = new RequestJson();
+        UserClaroVideo user = new UserClaroVideo();
 
         
         
-        //String country="502";
-        String msisdn = String.valueOf(request.getParameter("msisdn")).trim();
-        String keyword = String.valueOf(request.getParameter("keyword"));
+        user.setPaymentMethod(paymentMethod);
+        user.setMsisdn(country+msisdn);
         
-        AddPackResponse addPackresponse = new AddPackResponse();
-        int val = addPackresponse.addPackageCorePle(country+msisdn, "GUI", keyword, "");
-      
-        CodeErrorWebservice codeErrorWebservice = new CodeErrorWebservice();
+        responseMessage = requestJson.cancelUserClaroVideo("http://"+urlAmcoUser+"/hubOTT/internal/rest/deleteUserOTT", user);
         
-        String nameError = (String) codeErrorWebservice.getReponse().get(val);
         
         JSONObject json = new JSONObject();
-        json.put("code", val);
-        json.put("message", nameError);
+        json.put("code", 0);
+        json.put("message", responseMessage);
+        json.put("type", 0);
         response.setContentType("application/json");
         response.getWriter().write(json.toString());
         
-  
+        
+        
+        
+
+        
         
     }
-    
-    
 
-   
+
     @Override
     public String getServletInfo() {
         return "Short description";
     }
-
- 
 
 }

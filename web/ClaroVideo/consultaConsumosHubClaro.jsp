@@ -26,6 +26,10 @@
     
     <!-- Bootstrap -->
     <link href="../plantilla/vendors/bootstrap/dist/css/bootstrap.min.css" rel="stylesheet">
+    
+    <!-- Dialog -->
+    <link href="../plantilla/css/bootstrap-dialog.min.css" rel="stylesheet">
+    
     <!-- Font Awesome -->
     <link href="../plantilla/vendors/font-awesome/css/font-awesome.min.css" rel="stylesheet">
     <!-- NProgress -->
@@ -69,6 +73,12 @@
       
       
   <%  
+       System.out.println(session.getAttribute("nombre"));
+       System.out.println(session.getMaxInactiveInterval());
+        if((session.getAttribute("nombre") == null)){
+            response.sendRedirect("../index.jsp");
+        }
+         
         String nombre = (String) session.getAttribute("nombre");    
         String apellido = (String) session.getAttribute("apellido");
         String rol = (String) session.getAttribute("rol");
@@ -216,9 +226,7 @@
                    <li style="<%=displayClaroVideo%>"><a><i class="fa fa-play-circle"></i>Gestión Claro Video <span class="fa fa-chevron-down"></span></a>
                       <ul class="nav child_menu">
                           <li><a href="altasUsuarioHubClaro.jsp">Alta de usuario</a></li> 
-                          <li><a href="consultaConsumosHubClaro.jsp">Consulta consumos</a></li> 
-                          <li><a href="cambioCuenta.jsp">Cuentas</a></li> 
-                          <li><a href="consultaReportes.jsp">Reportes</a></li>                
+                          <li><a href="consultaConsumosHubClaro.jsp">Consulta consumos</a></li>                                    
                       </ul>
                     </li>
                 </ul>
@@ -275,8 +283,8 @@
                                 <div class='col-lg-4'>
                                           <div class="form-group">
                                               <label>Fecha Inicio</label>
-                                              <div class='input-group date' id='fechainicioDato'>                                            
-                                                  <input type='text' id="fechainicioDatotxt" class="form-control" />
+                                              <div class='input-group date' id='fechainicioDato' >                                            
+                                                  <input type='text' id="fechainicioDatotxt"  data-date-format="DD-MM-YYYY hh:mm:ss a" class="form-control"/>
                                                   <span class="input-group-addon">
                                                       <span class="glyphicon glyphicon-calendar"></span>
                                                   </span>
@@ -287,7 +295,7 @@
                                           <div class="form-group">
                                               <label>Fecha Final</label>
                                               <div class='input-group date'  id='fechafinalDato'>                                            
-                                                  <input id="fechafinalDatotxt" type='text' class="form-control" />
+                                                  <input id="fechafinalDatotxt" type='text' class="form-control"/>
                                                   <span class="input-group-addon">
                                                       <span class="glyphicon glyphicon-calendar"></span>
                                                   </span>
@@ -305,11 +313,13 @@
                                             <div class="form-group">
                                         <label>Selecciona el tipo de busqueda: </label>
                                         <label class="radio-inline">
-                                            <input type="radio"  name="optradio" value="0">Telefono
+                                            <input checked="checked" type="radio"  name="optradio" value="0">Telefono
                                         </label>
+                                        
                                         <label class="radio-inline">
                                             <input type="radio"  name="optradio" value="1">Email
-                                        </label>   
+                                        </label>  
+                                     
                                             </div>
                                     </div>
                                 </div>
@@ -319,7 +329,8 @@
                                     <div class="col-sm-4">
                                         <div class="form-group">
                                             <label>Ingresa la identidad de la selección:</label>
-                                            <input class="form-control" name="valor" id="valor" placeholder="valor" required="">
+                                            <input class="form-control" type="text" name="valor" id="valor" placeholder="valor" required="">
+                                            <input  class="form-control" type="text" name="valor2" id="valor2" style="display: none;">
                                         </div>
                                     </div>   
                                   </div>
@@ -327,7 +338,7 @@
                              <div class="row"> 
                                 <div class="col-sm-4">
                                     <div class="form-group">
-                                       <button type="submit" class="btn btn-primary">Buscar</button>
+                                       <button type="submit" id="btnSubmitSearch" class="btn btn-primary">Buscar</button>
                                        <button type="button" name="btnClear" id = "btnClear"  class="btn btn-primary">Limpiar</button>
                                     </div>
                                 </div>
@@ -337,7 +348,7 @@
 
                             <div id="message">
                                 <div class="progress">
-                                    <div id="progressId" class="progress-bar" role="progressbar" aria-valuenow="60" aria-valuemin="0" aria-valuemax="100" style="width: 0%;">
+                                    <div id="progressId" class="progress-bar" role="progressbar" aria-valuenow="0" aria-valuemin="0" aria-valuemax="100" style="width: 0%;">
                               
                                     </div>
                              
@@ -375,26 +386,14 @@
                                                           <th>Apellido</th>
                                                           <th>Id. Usuario</th>    
                                                           <th>Medio de Pago</th>          
-                                                          <th>No.Cuenta</th>  
-                                                          <th>Editar</th>  
-                                                          <th>Alta</th> 
-                                                          <th>Baja</th> 
-                                                     
-                                                      </tr>
-                                                  </thead>
-                                                  <tfoot>
-                                                      <tr>
-                                                          <th>Email</th>                                                      
-                                                          <th>Nombre</th>
-                                                          <th>Apellido</th>
-                                                          <th>Id. Usuario</th>    
-                                                          <th>Medio de Pago</th>          
-                                                          <th>No.Cuenta</th> 
+                                                          <th>No.Cuenta</th>
+                                                          <th>Id Cliente</th>
+                                                          <th>Estado</th>  
+                                                          <th>Tipo</th>
                                                           <th>Editar</th> 
-                                                          <th>Alta</th> 
-                                                          <th>Baja</th> 
+                                                          <th>Cancelación</th>                                                      
                                                       </tr>
-                                                  </tfoot>
+                                                  </thead>                                         
                                               </table>
                                           </div>
 
@@ -417,10 +416,22 @@
                           </div>
                           <div id="collapse2" class="panel-collapse collapse">
                               <div class="panel-body">
-                                  
-                              <div class="panel panel-default">    
-                              
-                              </div>       
+                                   <div class="panel-body">                                  
+
+                                       <div class="panel panel-default">  
+
+                                           <div class="panel-body">
+                                              <div class="container">
+                                                   <div class="row">                                                  
+                                                   <div class="col-sm-2">                                                           
+                                                           <button type="button" id="addSuscriptionAddon" class="btn btn-primary">Agregar Suscripción</button>  
+                                                   </div>                                             
+                                                   </div>
+                                              </div>
+                                           </div>  
+                                       </div>
+                                       
+                                   </div>
                                                                     
                                   <div class="col-lg-12">
                                       <div class="panel-body">
@@ -429,28 +440,18 @@
                                               <table id="TABLECONSUMOCV" class="table table-striped table-bordered table-hover" cellspacing="0" width="100%">  
                                                   <thead>
                                                       <tr>
-                                                          <th>DESCRIPCION</th>
-                                                          <th>IP</th>
-                                                          <th>FECHA_ALTA</th>
-                                                          <th>FECHA_EXPIRACION</th>
-                                                          <th>FECHA_CANCELACION</th>
-                                                          <th>PRECIO</th>    
-                                                          <th>ACTIVO</th>          
-                                                          <th>MONEDA</th>   
+                                                          <th>Descripcion</th>
+                                                          <th>Ip</th>
+                                                          <th>Fecha Alta</th>
+                                                          <th>Fecha Expiración</th>
+                                                          <th>Fecha Cancelación</th>
+                                                          <th>Precio</th>    
+                                                          <th>Estado</th>          
+                                                          <th>Moneda</th>   
+                                                          <th>Id Product</th>   
+                                                          <th>Baja</th>
                                                       </tr>
-                                                  </thead>
-                                                  <tfoot>
-                                                      <tr>
-                                                          <th>DESCRIPCION</th>
-                                                          <th>IP</th>
-                                                          <th>FECHA_ALTA</th>
-                                                          <th>FECHA_EXPIRACION</th>
-                                                          <th>FECHA_CANCELACION</th>
-                                                          <th>PRECIO</th>    
-                                                          <th>ACTIVO</th>          
-                                                          <th>MONEDA</th>   
-                                                      </tr>
-                                                  </tfoot>
+                                                  </thead>                                           
                                               </table>
 
 
@@ -463,20 +464,53 @@
                               </div>
                           </div>
                       </div>
-                      <div class="panel panel-default">
+                      
+                     <div class="panel panel-default">
                           <div class="panel-heading">
                               <h4 class="panel-title">
-                                  <a data-toggle="collapse" data-parent="#accordion" href="#collapse3">
-                                      Alquileres del Usuario</a>
+                                  <a data-toggle="collapse" data-parent="#accordion" href="#collapse5">
+                                      Medios de pago</a>
                               </h4>
                           </div>
-                          <div id="collapse3" class="panel-collapse collapse">
-                              
-                              
+                          <div id="collapse5" class="panel-collapse collapse">
                               <div class="panel-body">
-                                           <div class="panel-body">
+                                  
+                                  
+                                    <div class="col-lg-12">
+                                      <div class="panel-body">
+                                          <div class="table-responsive">
+                                              <table id="TABLEPAGOSCV" class="table table-striped table-bordered table-hover" cellspacing="0" width="100%">  
+                                                  <thead>
+                                                      <tr>
+                                                          <th>Id</th>
+                                                          <th>Descripción</th>                                            
+                                                          <th>Baja</th>                                                    
+                                                      </tr>
+                                                  </thead>                                               
+                                              </table>
+                                          </div>
+
+
+                                      </div>
+                                      <div class="ln_solid"></div>
+                                  </div>
+
+                                  
+                                  
+                              </div>
+                          </div>
+                      </div>
                       
-                             </div>  
+                     <div class="panel panel-default">
+                          <div class="panel-heading">
+                              <h4 class="panel-title">
+                                  <a data-toggle="collapse" data-parent="#accordion" href="#collapse6">
+                                      Rentas</a>
+                              </h4>
+                          </div>
+                          <div id="collapse6" class="panel-collapse collapse">
+                              <div class="panel-body">
+                                  
                                   
                                     <div class="col-lg-12">
                                       <div class="panel-body">
@@ -485,29 +519,16 @@
                                                   <thead>
                                                       <tr>
                                                           <th>Titulo</th>
-                                                          <th>Ip</th>
                                                           <th>Tiempo de Visualización</th>
-                                                          <th>Tiempo Max. de Visualización</th>
+                                                          <th>Tiempo Max. Visualización</th>
                                                           <th>Fecha de Alta</th>
-                                                          <th>Fecha Expiración</th>    
-                                                          <th>Precio</th>          
-                                                          <th>Medio de Pago</th>   
-                                                          <th>Acciones</th>   
+                                                          <th>Fecha Expiración</th> 
+                                                          <th>Precio</th>
+                                                          <th>Medio de Pago</th>  
+                                                          <th>Renta</th>    
+                                                          <th>Moneda</th> 
                                                       </tr>
-                                                  </thead>
-                                                  <tfoot>
-                                                      <tr>
-                                                          <th>Titulo</th>
-                                                          <th>Ip</th>
-                                                          <th>Tiempo de Visualización</th>
-                                                          <th>Tiempo Max. de Visualización</th>
-                                                          <th>Fecha de Alta</th>
-                                                          <th>Fecha Expiración</th>    
-                                                          <th>Precio</th>          
-                                                          <th>Medio de Pago</th>   
-                                                          <th>Acciones</th>    
-                                                      </tr>
-                                                  </tfoot>
+                                                  </thead>                                            
                                               </table>
                                           </div>
 
@@ -521,14 +542,15 @@
                               </div>
                           </div>
                       </div>
+          
                       <div class="panel panel-default">
                           <div class="panel-heading">
                               <h4 class="panel-title">
-                                  <a data-toggle="collapse" data-parent="#accordion" href="#collapse4">
+                                  <a data-toggle="collapse" data-parent="#accordion" href="#collapse7">
                                       Dispositivos del Usuario</a>
                               </h4>
                           </div>
-                          <div id="collapse4" class="panel-collapse collapse">
+                          <div id="collapse7" class="panel-collapse collapse">
                               <div class="panel-body">
                                   
                                   
@@ -542,18 +564,9 @@
                                                           <th>Tipo de Dispositivo</th>
                                                           <th>Nombre de Dispositivo</th>
                                                           <th>Fecha Activación</th>
-                                                          <th>Acciones</th>                                                    
+                                                          <th>Baja</th>                                                    
                                                       </tr>
-                                                  </thead>
-                                                  <tfoot>
-                                                      <tr>
-                                                          <th>Id Dispositivo</th>
-                                                          <th>Tipo de Dispositivo</th>
-                                                          <th>Nombre de Dispositivo</th>
-                                                          <th>Fecha Activación</th>
-                                                          <th>Acciones</th>     
-                                                      </tr>
-                                                  </tfoot>
+                                                  </thead>                                                 
                                               </table>
                                           </div>
 
@@ -587,7 +600,7 @@
 
         
         
-        <!-- Modal -->
+        <!-- Modal EDICION -->
         <div style="display: none;" class="modal fade" id="myModalEdit" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
             <div class="modal-dialog">
                 <div class="modal-content">
@@ -630,7 +643,7 @@
                             </div>
                             <div class="form-group row">
                                 <div class="col-sm-10">
-                                    <button type="submit" class="btn btn-primary mb-2">Confirmar</button>
+                                    <button type="submit" id="updateServiceName" class="btn btn-primary mb-2">Confirmar</button>
                                 </div>
                             </div>
             
@@ -641,7 +654,7 @@
                                 <div class="form-group row">
                                     <label for="inputPassword" class="col-sm-2 col-form-label">Renovación Password</label>  
                                      <div class="col-sm-10">
-                                        <button type="submit" class="btn btn-primary mb-2">Confirmar</button>
+                                        <button type="submit" id="updatePassword" class="btn btn-primary mb-2">Confirmar</button>
                                     </div>
                                 </div>
                             </form>      
@@ -656,7 +669,80 @@
 
             </div>
         </div> 
-        <!-- /page content -->
+        <!-- /page EDICION content -->
+        
+         <!-- Modal ELEGIBILIDAD -->
+        <div style="display: none;" class="modal fade" id="myModalEligibility" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+            <div class="modal-dialog">
+                <div class="modal-content">
+                    
+                <div class="modal-header" style="padding:35px 50px;">
+                    <button type="button" class="close" data-dismiss="modal">&times;</button>
+                    <h4><span class="glyphicon glyphicon-lock"></span> Elegibilidad</h4>
+                </div>
+                    
+                    
+                    <div class="modal-body">
+                        <div class="panel panel-default">
+                            <div class="panel-heading">Seleccionar Suscripción</div>
+                            <div class="panel-body">
+
+
+                                <div class="col-lg-12">
+                                    <div class="panel-body">
+                                        <div class="table-responsive">
+                                            <table id="TABLEADDONS" class="table table-striped table-bordered table-hover" cellspacing="0" width="100%">  
+                                                <thead>
+                                                    <tr>                                          
+                                                        <th>Id</th>
+                                                        <th>Suscripcion</th>
+                                                        <th>Key</th>
+                                                        <th>Amco</th>   
+                                                        <th>Estado</th>
+                                                        <th>Agregar</th>   
+
+                                                    </tr>
+                                                </thead>
+                                                <tfoot>
+                                                    <tr>
+                                                        <th>Id</th>
+                                                        <th>Suscripcion</th>
+                                                        <th>Key</th>
+                                                        <th>Amco</th>   
+                                                        <th>Estado</th>
+                                                        <th>Agregar</th>  
+                                                    </tr>
+                                                </tfoot>
+                                            </table>
+                                        </div>
+
+
+                                    </div>
+                                    <div class="ln_solid"></div>
+                                </div>
+
+                                <div class="row"> 
+                                    <div class="col-sm-4">
+                                        <div class="form-group">                                   
+                                            <button type="button" name="btnCancel" id = "btnCancel"  class="btn btn-primary">Cerrar</button>
+                                        </div>
+                                    </div>
+
+                                </div>
+
+
+
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                
+
+
+            </div>
+        </div> 
+        <!-- /page ELEGIBILIDAD content -->
+
 
         <!-- footer content -->
         <footer>
@@ -699,9 +785,15 @@
     <script src="../plantilla/vendors/jszip/dist/jszip.min.js"></script>
     <script src="../plantilla/vendors/pdfmake/build/pdfmake.min.js"></script>
     <script src="../plantilla/vendors/pdfmake/build/vfs_fonts.js"></script>
+    
+    <!-- Dialog -->
+    <script src="../plantilla/js/bootstrap-dialog.min.js"></script>   
 
     <!-- Custom Theme Scripts -->
     <script src="../plantilla/build/js/custom.min.js"></script>
+    
+     <!-- Mask -->
+     <script src="../plantilla/js/jquery.mask.min.js"></script>
   
 
     
@@ -713,12 +805,14 @@
       var dateinit="";  
       var datefinish="";
       var msisdn="";
+      var type="";
       var opcion= "";
       var valor="";
+     
       
       $('#message').hide();
      $(function () {
-                    $('#fechainicioDato').datetimepicker({
+                    $('#fechainicioDato').datetimepicker({                                       
                         format: "DD-MM-YYYY hh:mm:ss a"                      
                         });
                     });
@@ -730,17 +824,82 @@
                     });
 
         
-        $(document).ready(function(){      
+        $(document).ready(function(){
+                     
+          var newTimeFinish =  moment().format('DD-MM-YYYY');
+          
+          var newTimeInit =  moment().subtract(31,'day').format('DD-MM-YYYY');
+          //var timeAndDate = moment('21-05-2020 00:00:00' , 'DD-MM-YYYY hh:mm:ss',true).format('DD-MM-YYYY hh:mm:ss');
+          var initTime = moment(newTimeInit+' '+'11:59:59 PM', 'DD-MM-YYYY hh:mm:ss a').format('DD-MM-YYYY hh:mm:ss a');
+          var finishTime = moment(newTimeFinish+' '+'11:59:59 PM', 'DD-MM-YYYY hh:mm:ss a').format('DD-MM-YYYY hh:mm:ss a');
+           
+         
+            $('#fechainicioDatotxt').val(initTime);
+            $('#fechafinalDatotxt').val(finishTime);
+         
+         
+         function formatAMPM(date) {
+                var hours = date.getHours();
+                var minutes = date.getMinutes();
+                var ampm = hours >= 12 ? 'pm' : 'am';
+                hours = hours % 12;
+                hours = hours ? hours : 12; // the hour '0' should be '12'
+                minutes = minutes < 10 ? '0'+minutes : minutes;
+                var strTime = hours + ':' + minutes + ' ' + ampm;
+                return strTime;
+        }
+        
+        
+        
+        $('#valor').mask('0000 0000');
+        
+        
+        $('input:radio').change(function(){         
+            
+             var opcion =$("input[name='optradio']:checked").val();
+             if(opcion==0){
+                 $('#valor').mask('0000 0000');
+             }else{
+                 $('#valor').unmask();
+             }   
+        });   
         
         function barProgress(val){
                  progress=progress+val;
                  document.getElementById("progressId").style.width = progress+"%";
                  $("#progressId").text(progress+"%");
+                 if (progress == 100) {
+                    $("#btnSubmitSearch").attr("disabled", false);
+                }
         }
+                    
+        var tableConsumo= $('#TABLECONSUMOCV').DataTable( );  
+        var tableDispositivos= $('#TABLEDISPOSITIVOSCV').DataTable( ); 
+        var tableUser=$('#TABLEUSERCV').DataTable( ); 
+        var tablePagos=$('#TABLEPAGOSCV').DataTable( ); 
+        var tableAlquiler=$('#TABLEALQUILERCV').DataTable( ); 
+        var tableAddons=$('#TABLEADDONS').DataTable( ); 
         
-   
+        
+        function listTables(){
             
-        var tableConsumo= $('#TABLECONSUMOCV').DataTable( {           
+          tableAddons.destroy(); 
+          tableConsumo.destroy();
+          tableDispositivos.destroy();
+          tableUser.destroy();
+          tablePagos.destroy();
+          tableAlquiler.destroy();
+          
+          tableAddons.clear().draw();
+          tableConsumo.clear().draw();
+          tableDispositivos.clear().draw();
+          tableUser.clear().draw();
+          tablePagos.clear().draw();
+          tableAlquiler.clear().draw();
+          
+          
+            
+          tableConsumo = $('#TABLECONSUMOCV').DataTable( {           
                             "ajax" : {
                             "url": "../GetListSubscriberUserHubClaro",
                             "type": "POST",
@@ -764,23 +923,35 @@
                                   'csv', 'excel'
                                        ],
                             "columns" : [       
-                                    {"title": "DESCRIPCION"},
-                                    {"title": "IP"},
-                                    {"title": "FECHA_ALTA"},
-                                    {"title": "FECHA_EXPIRACION"},
-                                    {"title": "FECHA_CANCELACION"},
-                                    {"title": "PRECIO"},
-                                    {"title": "ACTIVO"},
-                                    {"title": "MONEDA"}   
+                                    {"title": "Descripción"},
+                                    {"title": "Ip"},
+                                    {"title": "Fecha Alta"},
+                                    {"title": "Fecha Expiración"},
+                                    {"title": "Fecha Cancelación"},
+                                    {"title": "Precio"},
+                                    {"title": "Estado"},
+                                    {"title": "Moneda"},
+                                    {"title": "Id Product"}   
 
-                            ]
-         });    
-        
-        var tableDispositivos= $('#TABLEDISPOSITIVOSCV').DataTable( {
+                           ],
+                                    "columnDefs": [
+                                        {
+                                            "targets": 9,
+                                            "data": null,
+                                            "defaultContent": "<center><a href='#' id='deleteAddon' data-toggle='tooltip' data-placement='top' title='Eliminar Bundle'>" +
+                                                    "<img  src='../img/remove.png' width='16' height='16'  border='0' />" +
+                                                    "</a></center>"
+                                        }
+                                    ]
+                    });  
+                    
+          tableDispositivos = $('#TABLEDISPOSITIVOSCV').DataTable( {
                             "ajax" : {
                             "url": "../GetListDeviceHubClaro",
                             "type": "POST",
-                            "data" : function(d){                            
+                            "data" : function(d){   
+                                             d.dateinit=dateinit;
+                                             d.datefinish=datefinish;
                                              d.option=opcion;
                                              d.valor=valor; 
                                             },
@@ -799,12 +970,20 @@
                                     {"title": "Id Dispositivo"},
                                     {"title": "Tipo de Dispositivo"},
                                     {"title": "Nombre de Dispositivo"},
-                                    {"title": "Fecha Activación"},
-                                    {"title": "Acciones"}     
-                            ]
+                                    {"title": "Fecha Activación"}                                     
+                            ],
+                                    "columnDefs": [
+                                        {
+                                            "targets": 4,
+                                            "data": null,
+                                            "defaultContent": "<center><a href='#' id='deleteDevice' data-toggle='tooltip' data-placement='top' title='Quitar Dispositivo'>" +
+                                                    "<img  src='../img/remove.png' width='16' height='16'  border='0' />" +
+                                                    "</a></center>"
+                                        }
+                                    ]
                     });
                     
-        var tableUser= $('#TABLEUSERCV').DataTable( {    
+          tableUser =  $('#TABLEUSERCV').DataTable( {    
                             "ajax" : {
                             "url": "../GetListDataUserHubClaro",
                             "type": "POST",
@@ -815,7 +994,7 @@
                                              d.datefinish=datefinish;
                                             },
                                     "complete" : function(response){                                   
-                                     barProgress(20); 
+                                     barProgress(20);                                      
                                     }              
                              },
                             "global" : false,
@@ -830,26 +1009,23 @@
                                     {"title": "Nombre"},
                                     {"title": "Apellido"}, 
                                     {"title": "Id. Usuario"}, 
+                                    {"title": "Id. Cliente"}, 
                                     {"title": "Medio de Pago"}, 
-                                    {"title": "No.Cuenta"}
+                                    {"title": "No.Cuenta"},
+                                    {"title": "Estado"},
+                                    {"title": "Tipo"}
+                                
                             ],
                                     "columnDefs": [
                                         {
-                                            "targets": 6,
+                                            "targets": 9,
                                             "data": null,
                                             "defaultContent": "<center><a href='#' id='updateCuenta' data-toggle='tooltip' data-placement='top' title='Editar datos'>" +
                                                     "<img  src='../img/pencil.png' width='16' height='16'  border='0' />" +
                                                     "</a></center>"
-                                        },
+                                        },                                  
                                         {
-                                            "targets": 7,
-                                            "data": null,
-                                            "defaultContent": "<center><a href='#' id='addCuenta' data-toggle='tooltip' data-placement='top' title='Altas'>" +
-                                                    "<img  src='../img/add.png' width='16' height='16'  border='0' />" +
-                                                    "</a></center>"
-                                        },
-                                        {
-                                            "targets": 8,
+                                            "targets": 10,
                                             "data": null,
                                             "defaultContent": "<center><a href='#' id='deleteCuenta' data-toggle='tooltip' data-placement='top' title='Bajas'>" +
                                                     "<img  src='../img/remove.png' width='16' height='16'  border='0' />" +
@@ -858,16 +1034,57 @@
                                     ]
                     });
                     
-        var tableAlquiler= $('#TABLEALQUILERCV').DataTable( {
+          tablePagos= $('#TABLEPAGOSCV').DataTable( {
+                            "ajax" : {
+                            "url": "../GetListPaymentHubClaro",
+                            "type": "POST",
+                            "data" : function(d){                            
+                                             d.option=opcion;
+                                             d.valor=valor; 
+                                             d.dateinit=dateinit;
+                                             d.datefinish=datefinish;
+                                            },
+                                    "complete" : function(response){                                       
+                                        barProgress(20); 
+                                    }              
+                             }, 
+                            "autoWidth": true,                   
+                            "lengthMenu": [[ 4, -1], [ 4,20,"All"]],
+                            "dataType" : "json",
+                            "dom" : "Bfrtip",       
+                            "buttons" : [
+                                  'csv', 'excel'
+                                       ],
+                            "columns" : [       
+                                    {"title": "Id"},
+                                    {"title": "Descripcion"}  
+                            ],
+                                    "columnDefs": [  
+                                        {
+                                            "width": "10%",
+                                            "targets": 2,
+                                            "data": null,
+                                            "defaultContent": "<center><a href='#' id='deletePago' data-toggle='tooltip' data-placement='top' title='Quitar Pago'>" +
+                                                    "<img  src='../img/remove.png' width='16' height='16'  border='0' />" +
+                                                    "</a></center>"
+                                        }
+                                    ],
+                                    fixedColumns: true
+                           
+                    });
+                    
+          tableAlquiler= $('#TABLEALQUILERCV').DataTable( {
                             "ajax" : {
                             "url": "../GetListRentHubClaro",
                             "type": "POST",
                             "data" : function(d){                            
                                              d.option=opcion;
                                              d.valor=valor; 
+                                             d.dateinit=dateinit;
+                                             d.datefinish=datefinish;
                                             },
-                                    "complete" : function(response){                                    
-                                     barProgress(20); 
+                                    "complete" : function(response){                                       
+                                        barProgress(20); 
                                     }              
                              }, 
                             "global" : false,
@@ -879,46 +1096,103 @@
                                        ],
                             "columns" : [       
                                     {"title": "Titulo"},
-                                    {"title": "Ip"},
-                                    {"title": "Tiempo de Visualización"},
-                                    {"title": "Tiempo Max. de Visualización"},
-                                    {"title": "Fecha de Alta"},     
-                                    {"title": "Fecha Expiración"}, 
-                                    {"title": "Precio"}, 
-                                    {"title": "Medio de Pago"}, 
-                                    {"title": "Acciones"}
+                                    {"title": "Tiempo de Visualización"}, 
+                                    {"title": "Tiempo Max. Visualización"},
+                                    {"title": "Fecha de Alta"},
+                                    {"title": "Fecha Expiración"},
+                                    {"title": "Precio"},
+                                    {"title": "Medio de Pago"},
+                                    {"title": "Renta"},
+                                    {"title": "Moneda"}
                             ]
                     });
-              
+                    
+          tableAddons= $('#TABLEADDONS').DataTable( {
+                            "ajax" : {
+                            "url": "../TableListAddons",
+                            "type": "POST",
+                            "data" : function(d){       
+                                            d.tableParameter1 = "select fp.ID_FAMILY,fp.PRODUCT_NAME,fp.PRODUCT_KEY,fp.ID_AMCO,( select count(1) from sm_onlinetrx.mpm_subscription_service ss inner join sm_catalog.mpm_service_pack_source ps on(ss.id_source=ps.id_source)  inner join sm_catalog.mpm_products_per_service pps on(ps.service=pps.service)  inner join sm_catalog.mpm_config_pack cp on(pps.pack=cp.id_pack)   where ss.phone=";          
+                                            d.tableParameter2= " and ss.state=1 and cp.id_tecnomen=fp.id_amco) as activado from SM_CATALOG.TB_HUB_FAMILY_PRODUCT fp  where GUI_VISIBILITY=1   AND PRODUCT_STATE = 1 AND CLIENT_TYPE='"+type+"'";
+                                            d.msisdn = msisdn;
+                                            },
+                                    "complete" : function(response){                                   
+                                 
+                                    }              
+                             }, 
+                            "global" : false,
+                            "lengthMenu": [[ 4, -1], [ 4,20,"All"]],
+                            "dataType" : "json",
+                            "dom" : "Bfrtip",
+                            "buttons" : [
+                                  'csv', 'excel'
+                                       ],
+                            "columns" : [       
+                                    {"title": "Id"},
+                                    {"title": "Suscripcion"},
+                                    {"title": "Key"},
+                                    {"title": "Amco"},
+                                    {"title": "Estado"}    
+                            ],
+                                    "columnDefs": [
+                                         {
+                                        "targets": 4,
+                                        "visible": false,
+                                        "searchable": false
+                                        },
+                                        {
+                                            "targets": 5,
+                                            "data": null,
+                                            "defaultContent": "<center><a href='#' id='selectAddon' data-toggle='tooltip' data-placement='top' title='Agregar Suscripción'>" +
+                                                    "<img  src='../img/add.png' width='16' height='16'  border='0' />" +
+                                                    "</a></center>"
+                                        }
+                                    ]
+                    });
             
-        $("#form_serviceGetSubscription").submit(function(event){
             
-             
-                    event.preventDefault(); //prevent default action 
+        }
                    
-                    tableUser.clear().draw();
-                    tableDispositivos.clear().draw();
-                    tableAlquiler.clear().draw();
-                    tableConsumo.clear().draw();
-                
+   
+                   
+        $("#form_serviceGetSubscription").submit(function(event){             
+                    event.preventDefault(); //prevent default action                   
+                                    
                     progress=0;  
                     barProgress(0);
               
                     dateinit=$("#fechainicioDatotxt").val();
                     datefinish=$("#fechafinalDatotxt").val();
                     opcion =$("input[name='optradio']:checked").val();
-                    valor=$("#valor").val();    
-                    msisdn=valor;
-                     $('#message').show();                 
                     
-                   
-                    tableConsumo.ajax.reload();
-                    tableDispositivos.ajax.reload();
-                    tableAlquiler.ajax.reload();
-                    tableUser.ajax.reload();
-                    barProgress(20); 
-               
-           
+                    valor=$("#valor").val().replace(/ /g,'');    
+                    msisdn=valor.replace(/ /g,'');
+                    
+                    
+                    //****aca inicia cuando seleccione el email, este busca el msisdn***************
+                     if (opcion=="1"){
+                         email = valor.replace(/ /g,'');
+                        console.log("seleccciona email");
+                           $.post(
+                            "../GetMsisdnHubClaro",
+                        {                   
+                            tableParameter: "select msisdn from SM_ONLINETRX.TB_HUB_SUBSCRIBER where email='"+email+"'"
+                            
+                        },
+                        function (json) {           
+                            msisdn= json.msisdn;
+                        });
+                    };
+                    //****aca termina la busqueda y asignacion del msisdn por email******************
+                           
+                     
+                        
+                    
+                     $("#btnSubmitSearch").attr("disabled", true);
+                      listTables();
+                     $('#message').show();      
+                    
+                    
                  
             });
             
@@ -930,6 +1204,7 @@
                 var name = $("#inputNombre").val();
                 var lastName = $("#inputApellido").val();                
                 var email = $("#inputEmail").val();
+                $("#emailBtn").attr("disabled", true);
        
                 $.post(
                         "../GetUpdateUser",
@@ -942,14 +1217,14 @@
                             auditory: auditory
                         },
                 function (json) {
-                alert(json.message); 
+                BootstrapDialog.alert(json.message);
+                $("#emailBtn").attr("disabled", false);
                 updateUserTable();
                 });
 
-        });
-    
+        });    
         
-         $("#form_serviceUpdateName").submit(function(event){
+        $("#form_serviceUpdateName").submit(function(event){
                 event.preventDefault(); //prevent default action 
                 
                 var type = "2";
@@ -957,6 +1232,7 @@
                 var name = $("#inputNombre").val();
                 var lastName = $("#inputApellido").val();                
                 var email = $("#inputEmail").val();
+                $("#updateServiceName").attr("disabled", true);
        
        
                 $.post(
@@ -970,14 +1246,15 @@
                             auditory: auditory
                         },
                 function (json) { 
-                  alert(json.message); 
+                  BootstrapDialog.alert(json.message);
+                  $("#updateServiceName").attr("disabled", false);
                 updateUserTable();
 
                 });
 
         });
         
-         $("#form_serviceUpdatePassword").submit(function(event){
+        $("#form_serviceUpdatePassword").submit(function(event){
                 event.preventDefault(); //prevent default action 
                 
                 var type = "3";
@@ -986,6 +1263,7 @@
                 var lastName = $("#inputApellido").val();                
                 var email = $("#inputEmail").val();
                 var password = $("#inputPassword").val(); 
+                $("#updatePassword").attr("disabled", true);
        
                 $.post(
                         "../GetUpdateUser",
@@ -999,7 +1277,9 @@
                             auditory: auditory
                         },
                 function (json) {  
-                alert(json.message);              
+                $("#updatePassword").attr("disabled", false);
+                 BootstrapDialog.alert(json.message);
+               
                 });
 
         });
@@ -1009,11 +1289,15 @@
         });
         
         function clearBar(){
+            
             $("#valor").val(""); 
+            $("#fechainicioDatotxt").val(""); 
+            $("#fechafinalDatotxt").val("");
             tableConsumo.clear().draw();
             tableUser.clear().draw();
             tableDispositivos.clear().draw();
             tableAlquiler.clear().draw(); 
+            tablePagos.clear().draw();
             progress=0;  
             barProgress(0);
             $('#message').hide();
@@ -1026,8 +1310,6 @@
               tableUser.clear().draw();
               tableUser.ajax.reload();
               barProgress(80); 
-                
-            
         }
         
         
@@ -1056,20 +1338,20 @@
               
         $('#TABLEUSERCV tbody').on('click', '#deleteCuenta', function () {
 
-        var data = tableUser.row($(this).parents('tr')).data();
-        var email = data[0];
-        var nombre = data[1];
-        var apellido = data[2];
+        var data = tableUser.row($(this).parents('tr')).data(); 
+        var paymentMethod = data[8];
      
         var option = confirm("¿Desea dar de baja al usuario?");
         if (option == true) {
             
               $.post(
-                        "../GetDeleteBundle",
+                        "../GetServiceCancelUserHubClaro",
                         {   
-                            msisdn: msisdn
+                            msisdn: msisdn,
+                            paymentMethod: paymentMethod
                         },
                 function (json) {  
+                clearBar();
                 alert(json.message);              
                 });
 
@@ -1081,22 +1363,214 @@
         
         
          });
+         
+         
+        $('#TABLEADDONS tbody').on('click', '#selectAddon', function () {
+
+        var data = tableAddons.row($(this).parents('tr')).data();
+        var dataUser = tableUser.column( 4 ).data();
+        var idAccount=dataUser[0];
+        
+        var keyword = data[2];
+        var amcoId = data[3];
+        var state = data[4];
+     
+        
+        if(state==1){
+            BootstrapDialog.alert("La suscripción que solicita ya es existente en el usuario, o esta en proceso de activación");        
+        }else{
+     
+        var phone = msisdn;
+        var option = confirm("¿Desea aplicar a la elegibilidad de la suscripción seleccionada?");
+        if (option == true) {
+            
+              $.post(
+                        "../GetEligibilityAccount",
+                        {   
+                            idAccount: idAccount,
+                            phone: phone,
+                            keyword:keyword,
+                            amcoId: amcoId
+                        },
+                function (json) {  
+                    var result = json.result;
+                    var keyword = json.keyword;  
+                    if (keyword === ""){
+                        BootstrapDialog.alert("Esta suscripción no puede aplicarse o es inexistente");                  
+                    }else{
+                        
+                            var optionS = confirm("El cliente puede aplicar a la suscripción "+keyword+" "+"¿Desea agregarlo?");
+                                if (optionS == true) {
+                                    
+                                     $.post(
+                                            "../GetListSuscriptionsAddons",
+                                            {   
+                                                phone: phone,                             
+                                                amcoId: keyword
+                                            },
+                                            function (json) {                                              
+                                            tableAddons.clear().draw();
+                                            tableAddons.ajax.reload();
+                                            BootstrapDialog.alert(json.message+"."+"  "+"La suscripción se estará procesando");  
+                                        });
+                                    
+                                    
+                                    
+                                
+                                } else {
+                                        alert("Cancelado");
+                                        }
+                        }
+
+                        
+                    
+                });
+
+                     
+                     
+            } else {
+            alert("Cancelado");
+        }
+    }
+        
+         });
+         
+        $('#TABLEPAGOSCV tbody').on('click', '#deletePago', function () {
+
+        var data = tablePagos.row($(this).parents('tr')).data();  
+        var payment = data[0];
+        var phone = msisdn;
+        var option = confirm("¿Desea cancelar el metodo de pago seleccionado?");
+        if (option == true) {
+            
+              $.post(
+                        "../GetCancelPayment",
+                        {   
+                            phone: phone,                  
+                            payment: payment
+                        },
+                function (json) {  
+                    
+                    BootstrapDialog.alert(json.message+".");  
+                   
+                     tablePagos.clear().draw();
+                     tablePagos.ajax.reload();
+                   
+                     });
+
+                     
+                     
+            } else {
+            alert("Cancelado");
+        }
         
         
+         });
+         
+         
+        $('#TABLEDISPOSITIVOSCV tbody').on('click', '#deleteDevice', function () {
+
+        var data = tableDispositivos.row($(this).parents('tr')).data();  
+        var device = data[0];
+        var phone = msisdn;
+        var option = confirm("¿Desea quitar el dispositivo seleccionado?");
+        if (option == true) {
+            
+              $.post(
+                        "../GetCancelDevice",
+                        {   
+                            phone: phone,                  
+                            device: device
+                        },
+                function (json) {  
+                    BootstrapDialog.alert(json.message+"."); 
+                     tableDispositivos.clear().draw();
+                     tableDispositivos.ajax.reload();
+                   
+                     });
+
+                     
+                     
+            } else {
+            alert("Cancelado");
+        }
+        
+        
+         });
+         
+         
+        $('#TABLECONSUMOCV tbody').on('click', '#deleteAddon', function () {
+
+        var data = tableConsumo.row($(this).parents('tr')).data();  
+        var amcoId = data[8];
+        var phone = msisdn;
+        var option = confirm("¿Desea cancelar la suscripción seleccionada?");
+        if (option == true) {
+            
+              $.post(
+                        "../GetCancelSuscriptionsAddons",
+                        {   
+                            phone: phone,                  
+                            amcoId: amcoId
+                        },
+                function (json) {  
+                     BootstrapDialog.alert(json.message+"."); 
+                     tableConsumo.clear().draw();
+                     tableConsumo.ajax.reload();
+                   
+                     });
+
+                     
+                     
+            } else {
+            alert("Cancelado");
+        }
+        
+        
+         });
+         
+
+               
+         $( "#addSuscriptionAddon" ).click(function() {              
+                $("#myModalEligibility").modal({backdrop: 'static', keyboard: false}); 
+                var data = tableUser.column( 8 ).data();
+                type=data[0];
+                tableAddons.clear().draw();
+                tableAddons.ajax.reload();
+                
+              
+         });
+        
+        $( "#addSuscriptionBundle" ).click(function() {
+                
+         });
+        
+        
+        $( "#btnCancel" ).click(function() {                
+                 $('#myModalEligibility').modal('toggle');
+         });
         
         
         
 
 
         
-
-    
-         progress=0;  
+        //tablePagos.clear().draw();
+        //tablePagos.ajax.reload();
+        //tablePagos.columns.adjust().draw();
+        progress=0;  
         barProgress(0);
+        
+        
+        
+     
+            
+      
 
 
     });
-            
+    
+
 
    
         

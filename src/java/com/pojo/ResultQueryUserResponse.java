@@ -11,8 +11,8 @@ import java.util.ArrayList;
 public class ResultQueryUserResponse {
     
     private ArrayList<String[]> userResponse;
-    private Response response;    
-
+    private Response response;  
+  
 
     public ArrayList<String[]> getUserResponse() {
         return userResponse;

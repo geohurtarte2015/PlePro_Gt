@@ -5,7 +5,7 @@
 package controller;
 
 import com.google.gson.Gson;
-import java.util.Iterator;
+
 import com.google.gson.GsonBuilder;
 import java.util.ArrayList;
 import view.jsonparse.DataTableObject;

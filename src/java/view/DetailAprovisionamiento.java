@@ -19,7 +19,9 @@ public class DetailAprovisionamiento
   extends HttpServlet
 {
   private Configuration configuration = null;
-  public DetailAprovisionamiento() {}
+  public DetailAprovisionamiento() {
+  
+  }
   
   protected void processRequest(HttpServletRequest request, HttpServletResponse response)
     throws ServletException, IOException
@@ -55,14 +57,6 @@ public class DetailAprovisionamiento
 
     List<String[]> listPacksDetails = executeSql.selectSql("select a.id_tr_service, a.phone,c.description,a.result_code as code_status,d.description as status,a.result_code_ws,a.registered_date\nfrom mpm_transaction_packs a\ninner join sm_catalog.mpm_products_per_service b\non a.product_service_id = b.id\ninner join sm_catalog.mpm_config_pack c\non b.pack = c.id_pack\ninner join sm_catalog.mpm_transaction_result_code d\non a.result_code=d.ID \nwhere id_tr_service=" + id + "\nand phone="+msisdn+" order by id_tr_service desc");
     
-
-
-
-
-
-
-
-
 
     GetJson getJson = new GetJson();
     

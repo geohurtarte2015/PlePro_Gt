@@ -796,15 +796,14 @@ $(document).ready(function () {
             "type": "POST",           
             "data": function (d) {
                 d.id = 1;
-                d.tableParameter = "SELECT sp.service_id,sp.description description_service,cp.ID_PACK,cp.DESCRIPTION,cp.ID_TECNOMEN,cp.ACCOUNT_TYPE,cp.RECHARGE_POLICY,cp.EXPIRY_TIME,cp.UNITS,cp.EXPIRY_DAY,pr.VALUE, pr.ott_credit,ott_debit,text_source,text_keyword,sp.id_profilelist,sp.ini_date,sp.end_date,PPS.AUTO_RENEWAL,sps.description description_pkg,sps.channel,sc.description_channel,sc.description_act_comercial,pps.id product_service_id FROM MPM_SERVICE_PACK_RATE pr JOIN MPM_SERVICE_PACK sp ON sp.SERVICE_ID = pr.service"+
+                d.tableParameter = "SELECT sp.service_id,sp.description description_service,cp.ID_PACK,cp.DESCRIPTION,cp.ID_TECNOMEN,cp.ACCOUNT_TYPE,cp.RECHARGE_POLICY,cp.EXPIRY_TIME,cp.UNITS,cp.EXPIRY_DAY,pr.VALUE,pr.VALUE2, pr.ott_credit,ott_debit,text_source,text_keyword,sp.id_profilelist,sp.ini_date,sp.end_date,PPS.AUTO_RENEWAL,sps.description description_pkg,sps.channel,sc.description_channel,sc.description_act_comercial,pps.id product_service_id FROM MPM_SERVICE_PACK_RATE pr JOIN MPM_SERVICE_PACK sp ON sp.SERVICE_ID = pr.service"+
                                     " JOIN MPM_CONFIG_PACK cp  ON pr.pack = cp.ID_PACK  JOIN MPM_PRODUCTS_PER_SERVICE pps  ON pps.service = sp.SERVICE_ID AND pps.pack = cp.ID_PACK  JOIN MPM_SERVICE_PACK_SOURCE sps  ON sp.service_id = sps.service  JOIN MPM_SERVICE_CHANNEL sc  ON sps.channel = sc.id_channel";
             },
             "complete": function (response) {
                 $('#message').hide();
             }
-        },
-        "global": false,
-        "lengthMenu": [[10, -1], [10, 100]],
+        },      
+        "lengthMenu": [[10, 25, 50, -1], [10, 25, 50, "All"]],
         "dataType": "json",
         "dom": "Bfrtip",
         "buttons": [
@@ -834,7 +833,8 @@ $(document).ready(function () {
             {"width": "10%", "targets": 20},
             {"width": "20%", "targets": 21},
             {"width": "10%", "targets": 22},
-            {"width": "10%", "targets": 23}
+            {"width": "10%", "targets": 23},
+            {"width": "10%", "targets": 24}
         ],
         "columns": [
             {"title": "SERVICE_ID"},
@@ -847,7 +847,8 @@ $(document).ready(function () {
             {"title": "EXPIRY_TIME"},
             {"title": "UNITS"},
             {"title": "EXPIRY_DAY"},
-            {"title": "VALUE"},
+            {"title": "VALUE Q"},
+            {"title": "VALUE $"},
             {"title": "OTT_CREDIT"},
             {"title": "OTT_DEBIT"},
             {"title": "TEXT_SOURCE"},
@@ -1613,6 +1614,7 @@ $(document).ready(function () {
         var dateinitservicepacktxt = null;
         var datefinalservicepacktxt = null;          
         var packPrice = null;
+        var packPriceDollar = null;
         var ottDebit = null;
         var ottCredit = null;     
         var RateTypePack = null;
@@ -1630,6 +1632,12 @@ $(document).ready(function () {
         
          if($("#PackPrice").val()!=""){
         packPrice = $("#PackPrice").val();
+        }
+        
+        if($("#PackPriceDollar").val().trim()!=""){
+        packPriceDollar = $("#PackPriceDollar").val();
+        }else{
+            packPriceDollar=0;
         }
         
          if($("#Ottdebit").val()!=""){
@@ -1659,8 +1667,8 @@ $(document).ready(function () {
            
            if(rows==0){alert("Debe vincular un canal al servicio")}else{
                
-               var insertPerService = "insert into mpm_products_per_service(id,service,pack,auto_renewal,ini_date,end_date,priority) values (SM_PROGRAM.SEQ_PRODUCTS_PER_SERVICE.nextval" + "," + idService + "," + idPack + ",0," + "to_date('" + dateinitservicepacktxt + "','dd/mm/yyyy HH:MI:SS AM')" + "," + "to_date('" + datefinalservicepacktxt + "','dd/mm/yyyy HH:MI:SS AM')" + ",null" + ")";
-            var insertPerPrice = "insert into mpm_service_pack_rate(id_rate,service,ini_date,end_date,value,ott_credit,ott_debit,pack,account,exchange_rate,rate_type) values (SM_PROGRAM.SEQ_SERVICE_PACK_RATE.nextval," + idService + "," + "to_date('" + dateinitservicepacktxt + "','dd/mm/yyyy HH:MI:SS AM')" + "," + "to_date('" + datefinalservicepacktxt + "','dd/mm/yyyy HH:MI:SS AM')" + "," + packPrice + "," + ottCredit + "," + ottDebit + "," + idPack + "," + account + ",null," + RateTypePack + ")";
+            var insertPerService = "insert into mpm_products_per_service(id,service,pack,auto_renewal,ini_date,end_date,priority) values (SM_PROGRAM.SEQ_PRODUCTS_PER_SERVICE.nextval" + "," + idService + "," + idPack + ",0," + "to_date('" + dateinitservicepacktxt + "','dd/mm/yyyy HH:MI:SS AM')" + "," + "to_date('" + datefinalservicepacktxt + "','dd/mm/yyyy HH:MI:SS AM')" + ",null" + ")";
+            var insertPerPrice = "insert into mpm_service_pack_rate(id_rate,service,ini_date,end_date,value,ott_credit,ott_debit,pack,account,exchange_rate,rate_type,value2) values (SM_PROGRAM.SEQ_SERVICE_PACK_RATE.nextval," + idService + "," + "to_date('" + dateinitservicepacktxt + "','dd/mm/yyyy HH:MI:SS AM')" + "," + "to_date('" + datefinalservicepacktxt + "','dd/mm/yyyy HH:MI:SS AM')" + "," + packPrice + "," + ottCredit + "," + ottDebit + "," + idPack + "," + account + ",null," + RateTypePack + ","+packPriceDollar+")";
 
 
             $.post(
@@ -1694,7 +1702,7 @@ $(document).ready(function () {
                 "type": "POST",
                 "data": function (d) {
                     d.id = 0;
-                    d.tableParameter = "select b.id_rate,a.id_pack,a.description,a.id_tecnomen,b.ott_credit,b.ott_debit,b.value,b.ini_date as init_price,b.end_date as end_date from mpm_config_pack a inner join mpm_service_pack_rate b on a.id_pack = b.pack  where b.service="+idService+" order by b.id_rate desc";
+                    d.tableParameter = "select b.id_rate,a.id_pack,a.description,a.id_tecnomen,b.ott_credit,b.ott_debit,b.value,b.value2,b.ini_date as init_price,b.end_date as end_date from mpm_config_pack a inner join mpm_service_pack_rate b on a.id_pack = b.pack  where b.service="+idService+" order by b.id_rate desc";
                 }
             },
             "global": false,
@@ -1708,12 +1716,13 @@ $(document).ready(function () {
                 {"title": "ID_TECNOMEN"},
                 {"title": "OTT_CREDIT"},
                 {"title": "OTT_DEBIT"},
-                {"title": "VALUE"},
+                {"title": "VALUE Q"},
+                {"title": "VALUE $"},
                 {"title": "INIT_PRICE"},
                 {"title": "END_DATE"}
             ],
         "columnDefs": [{
-                "targets": 9,
+                "targets": 10,
                 "data": null,
                 "defaultContent": "<center><a href='#' id='modificarPackPerPack'>" +
                         "<img  src='img/pencil.png' width='16' height='16'  border='0' />" +
@@ -1739,13 +1748,14 @@ $(document).ready(function () {
                     
                     var dateStringInit = json.Data2;
                     var dateStringEnd = json.Data3;
-                    var value = json.Data4;
+                    var value = json.Data4;                    
                     var ottCredit = json.Data5;
                     var ottDebit = json.Data6;
                     var pack = json.Data7;
                     var account = json.Data8;
                     var exchangeRate = json.Data9;
                     var rateType = json.Data10;
+                    var value2 = json.Data11;
 
                     //var dateObjectInit = new Date(dateStringInit);
                     //var dateObjectEnd = new Date(dateStringEnd);
@@ -1763,6 +1773,7 @@ $(document).ready(function () {
                     $("#idPackLink").val(idPack);
                     $("#packDesciptionLink").val(descriptionPack);
                     $("#PackPriceEdit").val(value);
+                    $("#PackPriceEditDollar").val(value2);
                     $("#OttdebitEdit").val(ottDebit);
                     $("#OttcreditEdit").val(ottCredit);
                     $("#AccountEdit").val(account);
@@ -1803,7 +1814,8 @@ $(document).ready(function () {
      $("#modificareditpackbtn").click(function () {   
         var auditory="Modificar paquete";
          
-        var PackPriceEdit = null;       
+        var PackPriceEdit = null;  
+        var PackPriceEditDollar = null;
         var OttdebitEdit = null;  
         var OttcreditEdit = null;  
         var AccountEdit = null; 
@@ -1814,6 +1826,11 @@ $(document).ready(function () {
         if($("#PackPriceEdit").val()!=""){        
             PackPriceEdit = $("#PackPriceEdit").val();        
         }
+        
+         if($("#PackPriceEditDollar").val()!=""){        
+            PackPriceEditDollar = $("#PackPriceEditDollar").val();        
+        }
+        
         
         if($("#OttdebitEdit").val()!=""){  
         OttdebitEdit = $("#OttdebitEdit").val(); 
@@ -1836,7 +1853,7 @@ $(document).ready(function () {
          
         $.post("TableSave",
                     {
-                        tableParameter: "update  mpm_service_pack_rate set ini_date=to_date('" + dateiniteditpacktxt + "','dd/mm/yyyy HH:MI:SS AM'),end_date=to_date('" + datefinaleditpacktxt + "','dd/mm/yyyy HH:MI:SS AM'),value="+PackPriceEdit+",ott_credit="+OttcreditEdit+",ott_debit="+OttdebitEdit+",account="+AccountEdit+",rate_type="+RateTypePackEdit+" where id_rate="+idProductService,
+                        tableParameter: "update  mpm_service_pack_rate set ini_date=to_date('" + dateiniteditpacktxt + "','dd/mm/yyyy HH:MI:SS AM'),end_date=to_date('" + datefinaleditpacktxt + "','dd/mm/yyyy HH:MI:SS AM'),value="+PackPriceEdit+",ott_credit="+OttcreditEdit+",ott_debit="+OttdebitEdit+",account="+AccountEdit+",rate_type="+RateTypePackEdit+",value2="+PackPriceEditDollar+" where id_rate="+idProductService,
                         auditory: auditory
                        
                     },
@@ -1858,7 +1875,8 @@ $(document).ready(function () {
 	event.preventDefault(); //prevent default action 
         var auditory="Crear paquete adicional";
          
-        var PackPriceEdit = null;       
+        var PackPriceEdit = null; 
+        var PackPriceEditDollar = null;
         var OttdebitEdit = null;  
         var OttcreditEdit = null;  
         var AccountEdit = null; 
@@ -1869,6 +1887,12 @@ $(document).ready(function () {
                 
         if ($("#PackPriceEdit").val() != "") {
             PackPriceEdit = $("#PackPriceEdit").val();
+        }
+        
+        if ($("#PackPriceEditDollar").val() != "") {
+            PackPriceEditDollar = $("#PackPriceEditDollar").val();
+        }else{
+            PackPriceEditDollar=0;
         }
 
         if ($("#OttdebitEdit").val() != "") {
@@ -1899,7 +1923,7 @@ $(document).ready(function () {
          
         $.post("TableSave",
                     {
-                        tableParameter: "insert into mpm_service_pack_rate(id_rate,service,ini_date,end_date,value,ott_credit,ott_debit,pack,account,exchange_rate,rate_type) values (SM_PROGRAM.SEQ_SERVICE_PACK_RATE.nextval,"+idService+","+"to_date('" + dateiniteditpacktxt + "','dd/mm/yyyy HH:MI:SS AM')"+","+"to_date('" + datefinaleditpacktxt + "','dd/mm/yyyy HH:MI:SS AM')"+","+PackPriceEdit+","+OttcreditEdit+","+OttdebitEdit+","+idPackSelection+","+AccountEdit+",null,"+RateTypePackEdit+")",
+                        tableParameter: "insert into mpm_service_pack_rate(id_rate,service,ini_date,end_date,value,ott_credit,ott_debit,pack,account,exchange_rate,rate_type,value2) values (SM_PROGRAM.SEQ_SERVICE_PACK_RATE.nextval,"+idService+","+"to_date('" + dateiniteditpacktxt + "','dd/mm/yyyy HH:MI:SS AM')"+","+"to_date('" + datefinaleditpacktxt + "','dd/mm/yyyy HH:MI:SS AM')"+","+PackPriceEdit+","+OttcreditEdit+","+OttdebitEdit+","+idPackSelection+","+AccountEdit+",null,"+RateTypePackEdit+","+PackPriceEditDollar+")",
                         auditory: auditory
                        
                     },
@@ -2584,6 +2608,7 @@ $(document).ready(function () {
         $('#dateinitservicepacktxt').val('');
         $('#datefinalservicepacktxt').val('');
         $('#PackPrice').val('');
+        $('#PackPriceDollar').val('');
         $('#Ottdebit').val('');
         $('#Ottcredit').val('');
         $('#dateinitpricepacktxt').val('');

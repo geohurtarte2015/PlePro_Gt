@@ -5,8 +5,11 @@
  */
 package view.crud;
 
+import com.controller.clarovideo.SprConverter;
 import com.pojo.ResultQueryUserResponse;
+import com.pojo.UserClaroVideo;
 import com.webservice.RequestJson;
+import configuration.Configuration;
 import controller.GetJson;
 import java.io.IOException;
 import java.io.PrintWriter;
@@ -26,6 +29,15 @@ import javax.servlet.http.HttpServletResponse;
  * @author LENOVO
  */
 public class GetListDataUserHubClaro extends HttpServlet {
+    
+      private Configuration configuration = null;
+    
+      public GetListDataUserHubClaro()  {       
+
+        configuration = new Configuration();
+         
+      }
+    
 
     /**
      * Processes requests for both HTTP <code>GET</code> and <code>POST</code>
@@ -54,14 +66,24 @@ public class GetListDataUserHubClaro extends HttpServlet {
             throws ServletException, IOException {
         
             processRequest(request, response);
+            
+              String country = configuration.getPrefixCountry();
+              String countryId = configuration.getCountry();
+              String urlAmcoOperation = configuration.getUrlAmcoOperationClaroVideo();
+              
+              String codeArea = configuration.getPrefixCountry();
+              String spr = configuration.getSpr();
         
-        String msisdn="";
-        String email="";
-        String json ="";
-        String dateInitP="";
-        String dateFinishP="";
-        String dateInit="";
-        String dateFinish="";        
+              String msisdn="";
+              String email="";
+              String json ="";
+              String dateInitP="";
+              String dateFinishP="";
+              String dateInit="";
+              String dateFinish="";        
+              //String country="502";
+              String phone="";
+
         
       
         
@@ -81,7 +103,7 @@ public class GetListDataUserHubClaro extends HttpServlet {
             dateInit = format.format(dateInitFormat);
             dateFinish = format.format(dateFinishFormat);
         } catch (ParseException ex) {
-            Logger.getLogger(GetListSubscriberUserHubClaro.class.getName()).log(Level.SEVERE, null, ex);
+               System.out.println(ex);
         }
 
         
@@ -92,28 +114,36 @@ public class GetListDataUserHubClaro extends HttpServlet {
       
         
         if (option.contains("0")){
-            msisdn=valor;
+            msisdn=country+valor.trim();
+            phone=valor.trim();            
         }else{
-            email=valor;
+            email=valor.trim();
         }
 
         
         
     
-        response.setContentType("application/json");
+        response.setContentType("application/json; charset=UTF-8");
         PrintWriter out = response.getWriter();
         
           RequestJson requestJson = new RequestJson();
         ResultQueryUserResponse responseQueryUserResponse = new ResultQueryUserResponse();
+        
+        SprConverter sprConverter = new SprConverter();
+        UserClaroVideo userClaroVideo = sprConverter.sprLineConverterLine(spr, phone, msisdn);
+        if(Integer.parseInt(userClaroVideo.getCodeResponse())==0){
+            msisdn=userClaroVideo.getMsisdn();
+        }
+        
 
         
-        responseQueryUserResponse = requestJson.queryOttUser("http://172.16.204.189:30100/hubOTT/internal/rest/QueryUserOtt", "GT", email, msisdn,"consultardatoscliente",dateInit,dateFinish);
+        responseQueryUserResponse = requestJson.queryOttUser("http://"+urlAmcoOperation+"/hubOTT/internal/rest/QueryUserOtt", countryId, email, msisdn,"consultardatoscliente",dateInit,dateFinish);
         
         String description = responseQueryUserResponse.getResponse().getDescription();
         int code = responseQueryUserResponse.getResponse().getCode();
         ArrayList<String[]> responseList = responseQueryUserResponse.getUserResponse();
-
-    
+        
+        
         GetJson getJson = new GetJson();
     
      

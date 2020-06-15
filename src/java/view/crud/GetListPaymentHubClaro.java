@@ -5,10 +5,8 @@
  */
 package view.crud;
 
-import com.controller.clarovideo.SprConverter;
 import com.pojo.Response;
 import com.pojo.ResultQueryUserResponse;
-import com.pojo.UserClaroVideo;
 import com.webservice.RequestJson;
 import configuration.Configuration;
 import controller.GetJson;
@@ -31,12 +29,11 @@ import model.ExecuteSql;
  *
  * @author LENOVO
  */
-public class GetListSubscriberUserHubClaro extends HttpServlet {
+public class GetListPaymentHubClaro extends HttpServlet {
     
+      private Configuration configuration = null;
     
-       private Configuration configuration = null;
-    
-      public GetListSubscriberUserHubClaro()  {       
+      public GetListPaymentHubClaro()  {       
 
         configuration = new Configuration();
          
@@ -62,21 +59,17 @@ public class GetListSubscriberUserHubClaro extends HttpServlet {
             throws ServletException, IOException {
         
             processRequest(request, response);
+        String country = configuration.getPrefixCountry();
+        String urlAmcoOperation = configuration.getUrlAmcoOperationClaroVideo();
+        String countryId = configuration.getCountry();
             
-            String spr = configuration.getSpr();
-            
-            String country = configuration.getPrefixCountry();
-            String countryId = configuration.getCountry();
-            String urlAmcoOperation = configuration.getUrlAmcoOperationClaroVideo();
-        
         String msisdn="";
         String email="";
         String json ="";
         String dateInitP="";
         String dateFinishP="";
         String dateInit="";
-        String dateFinish=""; 
-         String phone="";
+        String dateFinish="";        
         //String country="502";
         
       
@@ -84,8 +77,8 @@ public class GetListSubscriberUserHubClaro extends HttpServlet {
        
         dateInitP = String.valueOf(request.getParameter("dateinit"));
         dateFinishP = String.valueOf(request.getParameter("datefinish"));
-        String valor = String.valueOf(request.getParameter("valor")).trim();
-        String option = String.valueOf(request.getParameter("option")).trim();
+        String valor = String.valueOf(request.getParameter("valor"));
+        String option = String.valueOf(request.getParameter("option"));
         
         
         SimpleDateFormat format = new SimpleDateFormat("dd-MM-yyyy hh:mm:ss a");
@@ -97,22 +90,21 @@ public class GetListSubscriberUserHubClaro extends HttpServlet {
             dateInit = format.format(dateInitFormat);
             dateFinish = format.format(dateFinishFormat);
         } catch (ParseException ex) {
-            Logger.getLogger(GetListSubscriberUserHubClaro.class.getName()).log(Level.SEVERE, null, ex);
+               System.out.println(ex);
         }
 
         
        
+        
         
                 
       
         
         if (option.contains("0")){
             msisdn=country+valor.trim();
-            phone=valor.trim();            
         }else{
             email=valor.trim();
         }
-
 
         
         
@@ -123,18 +115,9 @@ public class GetListSubscriberUserHubClaro extends HttpServlet {
         RequestJson requestJson = new RequestJson();
         ResultQueryUserResponse responseQueryUserResponse = new ResultQueryUserResponse();
         
-        
-        SprConverter sprConverter = new SprConverter();
-        UserClaroVideo userClaroVideo = sprConverter.sprLineConverterLine(spr, phone, msisdn);
-        if(Integer.parseInt(userClaroVideo.getCodeResponse())==0){
-            msisdn=userClaroVideo.getMsisdn();
-        }
-        
-        
+        responseQueryUserResponse = requestJson.queryOttPaymentMethod("http://"+urlAmcoOperation+"/hubOTT/internal/rest/QueryOtt", countryId, email, msisdn,"listarmediosdepago",dateInit,dateFinish);
         
 
-        
-        responseQueryUserResponse = requestJson.queryOttSubscriptions("http://"+urlAmcoOperation+"/hubOTT/internal/rest/QueryUserOtt", countryId, email, msisdn,"consultardatoscliente",dateInit,dateFinish);
         
         String description = responseQueryUserResponse.getResponse().getDescription();
         int code = responseQueryUserResponse.getResponse().getCode();

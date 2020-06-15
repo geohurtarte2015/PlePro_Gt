@@ -24,6 +24,9 @@
        <!-- DatePick -->
     <link href="../plantilla/bootdate/build/css/bootstrap-datetimepicker.css" rel="stylesheet">
     
+        <!-- Dialog -->
+    <link href="../plantilla/css/bootstrap-dialog.min.css" rel="stylesheet">
+    
     <!-- Bootstrap -->
     <link href="../plantilla/vendors/bootstrap/dist/css/bootstrap.min.css" rel="stylesheet">
     <!-- Font Awesome -->
@@ -77,6 +80,12 @@
       
       
   <%  
+       System.out.println(session.getAttribute("nombre"));
+       System.out.println(session.getMaxInactiveInterval());
+        if((session.getAttribute("nombre") == null)){
+            response.sendRedirect("../index.jsp");
+        }
+      
         String nombre = (String) session.getAttribute("nombre");    
         String apellido = (String) session.getAttribute("apellido");
         String rol = (String) session.getAttribute("rol");
@@ -89,7 +98,7 @@
             String display4 = "display:block";
             String display5 = "display:block";
             String display6 = "display:block";
-                String display7 = "display:block";
+            String display7 = "display:block";
             
             int selectRol = Integer.parseInt(rol);
             
@@ -223,9 +232,7 @@
                   <li style="<%=displayClaroVideo%>"><a><i class="fa fa-play-circle"></i>Gestión Claro Video <span class="fa fa-chevron-down"></span></a>
                       <ul class="nav child_menu">
                           <li><a href="altasUsuarioHubClaro.jsp">Alta de usuario</a></li> 
-                          <li><a href="consultaConsumosHubClaro.jsp">Consulta consumos</a></li> 
-                          <li><a href="cambioCuenta.jsp">Cuentas</a></li> 
-                          <li><a href="consultaReportes.jsp">Reportes</a></li>                
+                          <li><a href="consultaConsumosHubClaro.jsp">Consulta consumos</a></li>                                    
                       </ul>
                     </li>
                 </ul>
@@ -285,6 +292,7 @@
                                                         <option selected="" disabled="" value="">Seleccionar...</option>
                                                         <option value="0">Pospago</option>        
                                                         <option value="1">Prepago</option> 
+                                                        <option value="3">Hibrido</option>                                                         
                                                         <option value="2">Linea Fija</option> 
                                                     </select>
                                                 </div>
@@ -334,6 +342,7 @@
                                   </div>
                                 
                                 <div class="row">
+                                    <!--
                                         <div class="panel panel-default">                                         
                                                 <div class="panel-body">
                                                 <div class="col-sm-3">
@@ -346,7 +355,7 @@
                                                 </div>
                                             </div>  
 
-                                            <div class="col-sm-3">
+                                           <div class="col-sm-3">
                                                 <div class="form-group">
                                                     <label>PRODUCTO</label>
                                                     <select id="OptionProduct" class="custom-select" required="">
@@ -355,6 +364,7 @@
                                                     </select>
                                                 </div>
                                             </div>  
+                                         -->
                                         </div>
                                              </div>
                                  
@@ -366,7 +376,7 @@
                              <div class="row"> 
                                 <div class="col-sm-4">
                                     <div class="form-group">
-                                       <button type="submit" class="btn btn-primary">Crear</button>
+                                       <button type="submit" id="creationSubmit" class="btn btn-primary">Crear</button>
                                        <button type="button" name="btnClearCrear" id = "btnClearAprov"  class="btn btn-primary">Limpiar</button>
                                     </div>
                                 </div>
@@ -457,6 +467,13 @@
 
     <!-- Custom Theme Scripts -->
     <script src="../plantilla/build/js/custom.min.js"></script>
+    
+    <!-- Dialog -->
+    <script src="../plantilla/js/bootstrap-dialog.min.js"></script>   
+    
+    
+    <!-- Mask -->
+     <script src="../plantilla/js/jquery.mask.min.js"></script>
   
 
     
@@ -472,6 +489,8 @@
 
         
         $(document).ready(function(){
+        
+        $('#msisdn').mask('00000000');
             
 
         var tablePackAprov = $('#TABLEPACKAPROV').DataTable({
@@ -527,9 +546,7 @@
 
     
          $("#form_serviceAddUserHubClaro").submit(function(event){
-                event.preventDefault(); //prevent default action 
-
-
+                event.preventDefault(); //prevent default action              
                 var auditory="Alta Usuario Claro Video";
                 var msisdn = $("#msisdn").val();
                 var name = $("#name").val();
@@ -537,11 +554,25 @@
                 var lastMotherName = $("#lastMotherName").val();
                 var email = $("#email").val();
                 var OptionBusiness = $("#OptionBusiness").val();
-                var OptionChannel = $( "#OptionChannel option:selected" ).text();
-                var OptionProduct = $("#OptionProduct").val();
-
-
-                $.post(
+                //var OptionChannel = $( "#OptionChannel option:selected" ).text();
+                var OptionChannel ="Guiweb";
+                var OptionProduct = "0";
+           
+                 
+                 
+                 BootstrapDialog.show({
+            message: '¿Desea crear el usuario?',
+            buttons: [{
+                icon: 'glyphicon glyphicon-send',
+                label: 'Aceptar',
+                cssClass: 'btn-primary',
+                autospin: true,
+                action: function(dialogRef){
+                    dialogRef.enableButtons(false);
+                    dialogRef.setClosable(false);
+                    dialogRef.getModalBody().html('La creación del usuario esta en proceso, espere porfavor a que salga el mensaje..');
+                    
+                    $.post(
                         "../GetServiceAddSubscriberHubClaro",
                         {
                             msisdn: msisdn,
@@ -563,9 +594,36 @@
                 $("#email").val("");
                 $("#OptionChannel").val("");                
                 $("#OptionProduct").val("");
-                alert(json.message);
+                
+                 dialogRef.close();
+                
+                BootstrapDialog.show({
+                    type: BootstrapDialog.TYPE_SUCCESS,
+                    title: 'Respuesta ',
+                    message: json.message,
+                    buttons: [{
+                        label: 'Finalizar',
+                        action: function(dialogRef){
+                            dialogRef.close();
+                        }
+                    }]
+                }); 
+                
+             
 
                 });
+                   
+                }
+            }, {
+                label: 'Cerrar',
+                action: function(dialogRef){
+                    dialogRef.close();
+                }
+            }]
+        });
+
+
+                
 
         });
         

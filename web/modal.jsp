@@ -408,8 +408,13 @@
                       <span class="section">Asignación de Precios</span>
                         <div class="row">
                             <div class="col-md-2">
-                                <label for="PackPrice"><span class="glyphicon glyphicon-user"></span> Precio</label>
-                                <input type="text" class="form-control" name="PackPrice" id="PackPrice" placeholder="Precio" required>
+                                <label for="PackPrice"><span class="glyphicon glyphicon-user"></span> Precio Q</label>
+                                <input type="text" class="form-control" name="PackPrice" id="PackPrice" placeholder="Precio Q" required>
+
+                            </div>
+                            <div class="col-md-2">
+                                <label for="PackPriceDollar"><span class="glyphicon glyphicon-user"></span> Precio $</label>
+                                <input type="text" class="form-control" name="PackPriceDollar" id="PackPriceDollar" placeholder="Precio $" required>
 
                             </div>
                             <div class="col-md-2">
@@ -425,21 +430,24 @@
                                 <label for="usrname"><span class="glyphicon glyphicon-user"></span> Account</label>
                                 <select  class="form-control" name="Account" id="Account" required>
                                 </select>
-                            </div> 
-
+                            </div>                             
                             <div class="col-md-2">
                                 <label for="usrname"><span class="glyphicon glyphicon-user"></span> Rate Type</label>
                                 <select id="RateTypePack" class="form-control" required>                                           
                                 </select>
                             </div> 
+                      </div>
+                      <div class="row">                 
+
 
                             <div class="col-md-2">
                                 <label for="usrname"><span class="glyphicon glyphicon-user"></span> Exchange</label>
                                 <input type="text" class="form-control" name="Exchange" id="Exchange" placeholder="Exchange">
                             </div>  
-
-                               
-                        </div>
+                      </div>
+                      
+                      
+                      
                    
                         <span class="section">Asignación de Canales</span>
                         <div class="row">   
@@ -593,12 +601,14 @@
                                  <table id="TABLEVINCULACIONPACKS" class="table table-striped table-bordered table-hover" style="cursor:pointer"  cellspacing="0" width="100%">
 
                                      <tr>
+                                         <th>ID_RATE</th>
                                          <th>ID_PACK</th>
                                          <th>DESCRIPTION</th>
                                          <th>ID_TECNOMEN</th>
                                          <th>OTT_CREDIT</th>
                                          <th>OTT_DEBIT</th>
-                                         <th>VALUE</th>
+                                         <th>VALUE Q</th>
+                                         <th>VALUE $</th>
                                          <th>INIT_PRICE</th>
                                          <th>END_DATE</th>
                                      </tr>
@@ -606,12 +616,14 @@
 
                                      <tfoot>
                                           <tr>
+                                         <th>ID_RATE</th>
                                          <th>ID_PACK</th>
                                          <th>DESCRIPTION</th>
                                          <th>ID_TECNOMEN</th>
                                          <th>OTT_CREDIT</th>
                                          <th>OTT_DEBIT</th>
-                                         <th>VALUE</th>
+                                         <th>VALUE Q</th>
+                                         <th>VALUE $</th>
                                          <th>INIT_PRICE</th>
                                          <th>END_DATE</th>
                                      </tr>
@@ -915,33 +927,40 @@
                      </div>
                      <br>
                      <div class="row">
-                         <div class="col-md-2">
-                             <label for="usrname"><span class="glyphicon glyphicon-user"></span> Precio</label>
-                             <input type="text" class="form-control" name="PackPriceEdit" id="PackPriceEdit" placeholder="Precio" required>
+                         <div class="col-md-3">
+                             <label for="usrname"><span class="glyphicon glyphicon-user"></span> Precio Q</label>
+                             <input type="text" class="form-control" name="PackPriceEdit" id="PackPriceEdit" placeholder="Precio Q" required>
 
                          </div>
-                         <div class="col-md-2">
+                         <div class="col-md-3">
+                             <label for="usrname"><span class="glyphicon glyphicon-user"></span> Precio $</label>
+                             <input type="text" class="form-control" name="PackPriceEditDollar" id="PackPriceEditDollar" placeholder="Precio $" required>
+
+                         </div>
+                         <div class="col-md-3">
                              <label for="usrname"><span class="glyphicon glyphicon-user"></span> Ott Debito</label>
                              <input type="text" class="form-control" name="OttdebitEdit" id="OttdebitEdit" placeholder="Ott Debito" required>
 
                          </div>
-                         <div class="col-md-2">
+                         <div class="col-md-3">
                              <label for="usrname"><span class="glyphicon glyphicon-user"></span> Ott Credito</label>
                              <input type="text" class="form-control" name="OttcreditEdit" id="OttcreditEdit" placeholder="Ott Credito" required>                          
                          </div>
-                         <div class="col-md-2">
+                     </div>
+                     <div class="row">
+                         <div class="col-md-3">
                              <label for="usrname"><span class="glyphicon glyphicon-user"></span> Account</label>
                              <select class="form-control" name="AccountEdit" id="AccountEdit" required>
                              </select>
                          </div> 
 
-                         <div class="col-md-2">
+                         <div class="col-md-3">
                              <label for="usrname"><span class="glyphicon glyphicon-user"></span> Rate Type</label>
                              <select id="RateTypePackEdit" class="form-control">                                           
                              </select>
                          </div> 
 
-                         <div class="col-md-2">
+                         <div class="col-md-3">
                              <label for="usrname"><span class="glyphicon glyphicon-user"></span> Exchange</label>
                              <input type="text" class="form-control" name="ExchangeEdit" id="ExchangeEdit" placeholder="Exchange">
                          </div>  

@@ -8,11 +8,17 @@ package view.crud;
 import com.pojo.Response;
 import com.pojo.ResultQueryUserResponse;
 import com.webservice.RequestJson;
+import configuration.Configuration;
 import controller.GetJson;
 import java.io.IOException;
 import java.io.PrintWriter;
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.List;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
@@ -24,6 +30,16 @@ import model.ExecuteSql;
  * @author LENOVO
  */
 public class GetListDeviceHubClaro extends HttpServlet {
+    
+    
+      private Configuration configuration = null;
+    
+      public GetListDeviceHubClaro()  {       
+
+        configuration = new Configuration();
+         
+      }
+    
 
 
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
@@ -44,40 +60,65 @@ public class GetListDeviceHubClaro extends HttpServlet {
             throws ServletException, IOException {
         
             processRequest(request, response);
-        
+            
+            String country = configuration.getPrefixCountry();
+            String countryId = configuration.getCountry();
+            String urlAmcoOperation = configuration.getUrlAmcoOperationClaroVideo();
+
         String msisdn="";
         String email="";
         String json ="";
+        String dateInitP="";
+        String dateFinishP="";
         String dateInit="";
-        String dateFinish="";
+        String dateFinish="";        
+        //String country="502";
         
-        dateInit = "2020-01-01T00:00:00Z";    
-        dateFinish = "2020-01-28T23:59:59Z";
+      
+        
+       
+        dateInitP = String.valueOf(request.getParameter("dateinit"));
+        dateFinishP = String.valueOf(request.getParameter("datefinish"));
         String valor = String.valueOf(request.getParameter("valor"));
         String option = String.valueOf(request.getParameter("option"));
+        
+        
+        SimpleDateFormat format = new SimpleDateFormat("dd-MM-yyyy hh:mm:ss a");
+        Date dateInitFormat;
+        try {
+            dateInitFormat = format.parse(dateInitP);
+            Date dateFinishFormat = format.parse(dateFinishP);
+            format = new SimpleDateFormat("yyyy-MM-dd'T'hh:mm:ssZ");
+            dateInit = format.format(dateInitFormat);
+            dateFinish = format.format(dateFinishFormat);
+        } catch (ParseException ex) {
+               System.out.println(ex);
+        }
+
+        
         
         
                 
       
         
         if (option.contains("0")){
-            msisdn=valor;
+            msisdn=country+valor.trim();
         }else{
-            email=valor;
+            email=valor.trim();
         }
 
         
         
     
-        response.setContentType("application/json");
+        response.setContentType("application/json; charset=UTF-8");
         PrintWriter out = response.getWriter();
         
           RequestJson requestJson = new RequestJson();
         ResultQueryUserResponse responseQueryUserResponse = new ResultQueryUserResponse();
 
         
-        responseQueryUserResponse = requestJson.queryOttDevice("http://172.16.204.189:30100/hubOTT/internal/rest/QueryOtt", "GT", email, msisdn,"consultardispositivoscliente",dateInit,dateFinish);
-        
+        responseQueryUserResponse = requestJson.queryOttDevice("http://"+urlAmcoOperation+"/hubOTT/internal/rest/QueryOtt", countryId, email, msisdn,"consultardispositivoscliente",dateInit,dateFinish);
+     
         String description = responseQueryUserResponse.getResponse().getDescription();
         int code = responseQueryUserResponse.getResponse().getCode();
         ArrayList<String[]> responseList = responseQueryUserResponse.getUserResponse();

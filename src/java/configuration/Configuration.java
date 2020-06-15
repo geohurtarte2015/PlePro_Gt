@@ -10,6 +10,22 @@ package configuration;
 
 public class Configuration {
 
+    /**
+     * @return the prefixCountry
+     */
+    public String getPrefixCountry() {
+        return prefixCountry;
+    }
+
+    /**
+     * @return the country
+     */
+    public String getCountry() {
+        return country;
+    }
+
+  
+
  
     
     private final String jdbcOffLineTrx;
@@ -31,6 +47,15 @@ public class Configuration {
     private final String wsdlLocation;
     private final String urlPos1;
     private final String urlPos2;
+    private final String urlHubClaroVideo;
+    private final String urlAmcoOperationClaroVideo;
+    private final String urlAmcoUserClaroVideo;
+    private final String spr;
+    private final String prefixCountry;
+    private final String country;
+    
+
+    
     
     public  Configuration(){
         jdbcOffLineTrx = "";
@@ -42,16 +67,30 @@ public class Configuration {
         jdbcProgram="DESCRIPTION = (ADDRESS = (PROTOCOL = TCP)(HOST = oracleprd06-scan)(PORT = 3872)) (CONNECT_DATA = (SERVER = DEDICATED) (SERVICE_NAME = PLEDBGT))";
         userJdbcProgram="sm_program";
         passwordJdbcProgram="C26pr#2019";
-        jdbcPos="DESCRIPTION = (ADDRESS = (PROTOCOL = TCP)(HOST = oracleprd04-scan)(PORT = 3872)) (CONNECT_DATA = (SERVER = DEDICATED) (SERVICE_NAME = POSDBGT))";
-        passwordJdbcPos="D26of#2019";
-        userJdbcPos="pos_offlinetrx";
         poolOffLineTrx="JDBC/PLEGT_TRX";
         poolCatalog="JDBC/PLEGT";
         poolProgram="";
         poolPos="";
         wsdlLocation="http://172.16.168.143:7003/WS_PLE_BRIDGE_GT/PackageCore?WSDL";
+        
+        //POS
         urlPos1="http://172.16.168.139:7003/wsValidatorPOS/webresources/validate/loadData";
         urlPos2="http://172.16.168.138:7003/wsValidatorPOS/webresources/validate/loadData";
+        jdbcPos="DESCRIPTION = (ADDRESS = (PROTOCOL = TCP)(HOST = oracleprd04-scan)(PORT = 3872)) (CONNECT_DATA = (SERVER = DEDICATED) (SERVICE_NAME = POSDBGT))";
+        passwordJdbcPos="D26of#2019";
+        userJdbcPos="pos_offlinetrx";
+        
+        
+        //CLARO VIDEO
+        urlHubClaroVideo="http://10.218.41.26:6006/WS_MPM_VIDEO_SPR/HubClaroVideo?WSDL";
+        urlAmcoOperationClaroVideo="172.16.204.189:30110";
+        urlAmcoUserClaroVideo="172.16.204.189:30110";
+        spr="172.16.204.215:10001";
+        prefixCountry="502";
+        country="GT";
+
+        
+        
     }
     
      public String getUrlPos2() {
@@ -144,6 +183,26 @@ public class Configuration {
    
     public String getWsdlLocation() {
         return wsdlLocation;
+    }
+    
+   
+    public String getUrlHubClaroVideo() {
+        return urlHubClaroVideo;
+    }
+
+  
+    public String getUrlAmcoOperationClaroVideo() {
+        return urlAmcoOperationClaroVideo;
+    }
+
+  
+    public String getUrlAmcoUserClaroVideo() {
+        return urlAmcoUserClaroVideo;
+    }
+
+  
+    public String getSpr() {
+        return spr;
     }
     
 

@@ -210,6 +210,7 @@
                           <li style="<%=display3%>"><a href="creacion.jsp">Carga de clientes POS</a></li> 
                           <li style="<%=display4%>"><a href="eliminar.jsp">Eliminar clientes POS</a></li>   
                           <li style="<%=display7%>"><a href="mantenimiento.jsp">Mantenimiento clientes POS</a></li>
+                          <li><a href="eliminacion901.jsp">Clientes 901</a></li>
                       </ul>
                   </li>
                   <li style="<%=display5%>"><a><i class="fa fa-user-plus"></i> Administración <span class="fa fa-chevron-down"></span></a>
